@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>{{ habit.title }}</h2>
+  <p>{{ habit.description }}</p>
+  <p><a href="{% url 'habits:log_habit' habit.pk %}">Log for a date</a> | <a href="{% url 'habits:delete_habit' habit.pk %}">Delete</a></p>
+  <h3>Logs</h3>
+  <ul>
+    {% for log in logs %}
+      <li>{{ log.date }} — {% if log.completed %}Done{% else %}Missed{% endif %} {% if log.notes %}- {{ log.notes }}{% endif %}</li>
+    {% empty %}
+      <li>No logs.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
