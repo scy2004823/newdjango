@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ action }} Recipe - Recipe Book{% endblock %}
+
+{% block content %}
+<center>
+    <h1>*** {{ action|upper }} RECIPE ***</h1>
+</center>
+
+<hr>
+
+<form method="post">
+    {% csrf_token %}
+    
+    <table width="100%" cellpadding="15" style="background: #FFF; border: 5px solid #000;">
+        <tr>
+            <td bgcolor="#FF1493" colspan="2" style="color: #FFF; font-weight: bold; text-align: center; font-size: 18px;">
+                RECIPE DETAILS
+            </td>
+        </tr>
+        
+        <tr>
+            <td colspan="2">
+                <label for="{{ form.title.id_for_label }}">Recipe Title *</label>
+                {{ form.title }}
+                {% if form.title.errors %}
+                <div style="color: #FF0000; font-weight: bold; margin-top: 5px;">ERROR: {{ form.title.errors }}</div>
+                {% endif %}
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="2">
+                <label for="{{ form.category.id_for_label }}">Category *</label>
+                {{ form.category }}
+                {% if form.category.errors %}
+                <div style="color: #FF0000; font-weight: bold; margin-top: 5px;">ERROR: {{ form.category.errors }}</div>
+                {% endif %}
+                <br><small>Don't see your category? <a href="{% url 'category_create' %}" target="_blank" style="color: #0000FF; text-decoration: underline;">Create one here!</a></small>
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="2">
+                <label for="{{ form.description.id_for_label }}">Description *</label>
+                {{ form.description }}
+                {% if form.description.errors %}
+                <div style="color: #FF0000; font-weight: bold; margin-top: 5px;">ERROR: {{ form.description.errors }}</div>
+                {% endif %}
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="2">
+                <label for="{{ form.ingredients.id_for_label }}">Ingredients *</label>
+                {{ form.ingredients }}
+                {% if form.ingredients.errors %}
+                <div style="color: #FF0000; font-weight: bold; margin-top: 5px;">ERROR: {{ form.ingredients.errors }}</div>
+                {% endif %}
+                <br><small>List each ingredient on a new line</small>
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="2">
+                <label for="{{ form.instructions.id_for_label }}">Cooking Instructions *</label>
+                {{ form.instructions }}
+                {% if form.instructions.errors %}
+                <div style="color: #FF0000; font-weight: bold; margin-top: 5px;">ERROR: {{ form.instructions.errors }}</div>
+                {% endif %}
+            </td>
+        </tr>
+
+        <tr>
+            <td width="33%">
+                <label for="{{ form.prep_time.id_for_label }}">Prep Time (minutes) *</label>
+                {{ form.prep_time }}
+                {% if form.prep_time.errors %}
+                <div style="color: #FF0000; font-weight: bold; margin-top: 5px;">ERROR: {{ form.prep_time.errors }}</div>
+                {% endif %}
+            </td>
+            <td width="33%">
+                <label for="{{ form.cook_time.id_for_label }}">Cook Time (minutes) *</label>
+                {{ form.cook_time }}
+                {% if form.cook_time.errors %}
+                <div style="color: #FF0000; font-weight: bold; margin-top: 5px;">ERROR: {{ form.cook_time.errors }}</div>
+                {% endif %}
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <label for="{{ form.servings.id_for_label }}">Servings *</label>
+                {{ form.servings }}
+                {% if form.servings.errors %}
+                <div style="color: #FF0000; font-weight: bold; margin-top: 5px;">ERROR: {{ form.servings.errors }}</div>
+                {% endif %}
+            </td>
+            <td>
+                <label for="{{ form.difficulty.id_for_label }}">Difficulty Level *</label>
+                {{ form.difficulty }}
+                {% if form.difficulty.errors %}
+                <div style="color: #FF0000; font-weight: bold; margin-top: 5px;">ERROR: {{ form.difficulty.errors }}</div>
+                {% endif %}
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="2" align="center" bgcolor="#FFFF00" style="padding: 20px;">
+                <button type="submit" class="btn">SAVE RECIPE!</button>
+                <a href="{% if recipe %}{% url 'recipe_detail' recipe.pk %}{% else %}{% url 'home' %}{% endif %}" class="btn btn-secondary">CANCEL</a>
+            </td>
+        </tr>
+    </table>
+</form>
+
+{% endblock %}

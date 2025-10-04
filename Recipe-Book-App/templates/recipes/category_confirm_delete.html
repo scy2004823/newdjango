@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}Delete Category - Recipe Book{% endblock %}
+
+{% block content %}
+<center>
+    <h1 style="color: #FF0000;">*** WARNING! ***</h1>
+</center>
+
+<table width="60%" align="center" cellpadding="20" style="background: #FF0000; border: 5px solid #000; margin: 30px auto;">
+    <tr>
+        <td bgcolor="#FFFF00" style="text-align: center;">
+            <h2>Are you sure you want to delete this category?</h2>
+            
+            <table width="100%" cellpadding="15" style="background: #FFE4E1; border: 3px solid #000; margin: 20px 0;">
+                <tr>
+                    <td>
+                        <p style="font-size: 20px; font-weight: bold;">{{ category.name }}</p>
+                        <p><b>Recipes in this category:</b> {{ category.recipes.count }}</p>
+                    </td>
+                </tr>
+            </table>
+            
+            <p style="color: #FF0000; font-weight: bold; font-size: 18px;">
+                THIS WILL DELETE ALL RECIPES IN THIS CATEGORY TOO!
+            </p>
+            
+            <form method="post" style="margin-top: 20px;">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">YES, DELETE IT!</button>
+                <a href="{% url 'category_list' %}" class="btn btn-secondary">NO, GO BACK!</a>
+            </form>
+        </td>
+    </tr>
+</table>
+{% endblock %}
