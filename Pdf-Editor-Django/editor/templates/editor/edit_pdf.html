@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PDF Editor</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .sidebar {
+            width: 100px;
+            background-color: #002A5B;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px 0;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+        }
+
+        .sidebar button {
+            background: none;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            width: 100%;
+        }
+
+        .sidebar button i {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fff;
+            padding: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-left: 100px;
+            position: fixed;
+            top: 0;
+            width: calc(100% - 100px);
+            z-index: 1;
+        }
+
+        .pdf-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            margin-left: 100px;
+            margin-top: 70px;
+            overflow: auto;
+            width: calc(100% - 100px);
+            height: calc(100vh - 140px); /* Adjusted height to account for pagination */
+        }
+
+        .canvas-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            user-select: none;
+        }
+
+        #pdf-canvas {
+            position: absolute;
+            left: 0;
+            top: 0;
+            touch-action: none;
+            user-select: none;
+        }
+
+        .btn-group button {
+            margin-right: 10px;
+        }
+
+        .text-toolbar, .draw-toolbar, .erase-toolbar {
+            display: none;
+            position: absolute;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            z-index: 1000;
+        }
+
+        .text-toolbar select, .text-toolbar input, .text-toolbar button,
+        .draw-toolbar input, .draw-toolbar button,
+        .erase-toolbar input, .erase-toolbar button {
+            margin-right: 5px;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #fff;
+            padding: 10px;
+            box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <button id="compress"><i class="fas fa-compress"></i><span>Compress</span></button>
+        <button id="convertWord"><i class="fas fa-file-word"></i><span>Word</span></button>
+        <button id="convertExcel"><i class="fas fa-file-excel"></i><span>Excel</span></button>
+        <button id="convertImage"><i class="fas fa-file-image"></i><span>Image</span></button>
+        
+    </div>
+    <div class="top-bar">
+        <div class="btn-group">
+            <button id="addText" class="btn btn-primary"><i class="fas fa-font"></i> Add Text</button>
+            <button id="addImage" class="btn btn-primary"><i class="fas fa-image"></i> Add Image</button>
+            <button id="draw" class="btn btn-primary"><i class="fas fa-pencil-alt"></i> Draw</button>
+            <button id="highlight" class="btn btn-primary"><i class="fas fa-highlighter"></i> Highlight</button>
+            <button id="erase" class="btn btn-primary"><i class="fas fa-eraser"></i> Erase</button>
+        </div>
+        <div class="btn-group">
+            <button id="zoomIn" class="btn btn-success"><i class="fas fa-search-plus"></i> Zoom In</button>
+            <button id="zoomOut" class="btn btn-success"><i class="fas fa-search-minus"></i> Zoom Out</button>
+            <button id="undo" class="btn btn-warning"><i class="fas fa-undo"></i> Undo</button>
+            <button id="redo" class="btn btn-warning"><i class="fas fa-redo"></i> Redo</button>
+            <button id="save" class="btn btn-info"><i class="fas fa-save"></i> Save</button>
+            <button id="export" class="btn btn-danger"><i class="fas fa-file-export"></i> Export</button>
+        </div>
+    </div>
+    <div class="pdf-container">
+        <div class="canvas-container">
+            <canvas id="pdf-canvas" class="lower-canvas"></canvas>
+            <canvas id="fabric-canvas" class="upper-canvas"></canvas>
+        </div>
+    </div>
+    <div class="text-toolbar">
+        <select id="font-family">
+            <option value="Arial">Arial</option>
+            <option value="Helvetica">Helvetica</option>
+            <option value="Times New Roman">Times New Roman</option>
+            <option value="Courier New">Courier New</option>
+        </select>
+        <input type="number" id="font-size" placeholder="Font Size" min="8" max="72" step="1">
+        <button id="bold" class="btn btn-secondary"><i class="fas fa-bold"></i></button>
+        <button id="italic" class="btn btn-secondary"><i class="fas fa-italic"></i></button>
+        <button id="underline" class="btn btn-secondary"><i class="fas fa-underline"></i></button>
+        <input type="color" id="font-color" value="#000000">
+        <input type="color" id="bg-color" value="#ffffff">
+        <button id="delete-text" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+    </div>
+    <div class="draw-toolbar">
+        <input type="range" id="draw-thickness" min="1" max="10" step="1" value="4">
+        <input type="range" id="draw-opacity" min="0" max="1" step="0.1" value="1">
+        <input type="color" id="draw-color" value="#000000">
+    </div>
+    <div class="erase-toolbar">
+        <input type="range" id="erase-thickness" min="1" max="100" step="1" value="10">
+    </div>
+    <div class="pagination">
+        <button id="prev" class="btn btn-secondary">← Previous</button>
+        <span id="page-num"></span>
+        <button id="next" class="btn btn-secondary">Next →</button>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.5.207/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.3.1/fabric.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/file-saver/2.0.5/FileSaver.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.6.0/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/compressorjs/1.0.7/compressor.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/docx/6.0.3/docx.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.2.1/exceljs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/compressorjs@1.0.7/dist/compressor.min.js"></script>
+
+
+    <script>
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.5.207/pdf.worker.min.js';
+
+        var url = "{{ pdf.file.url }}";
+        var pdfDoc = null,
+            pageNum = 1,
+            canvas = document.getElementById('pdf-canvas'),
+            ctx = canvas.getContext('2d'),
+            fabricCanvas = new fabric.Canvas('fabric-canvas'),
+            scale = 1.5,
+            undoStack = [],
+            redoStack = [];
+
+        // Helper function to convert rgb() to #rrggbb
+        function rgbToHex(rgb) {
+            var result = /^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/.exec(rgb);
+            return result ? "#" + ((1 << 24) + (parseInt(result[1]) << 16) + (parseInt(result[2]) << 8) + parseInt(result[3])).toString(16).slice(1) : rgb;
+        }
+        
+        function saveState() {
+            redoStack = [];
+            undoStack.push(JSON.stringify(fabricCanvas));
+        }
+
+        function renderPage(num) {
+            pdfDoc.getPage(num).then(function(page) {
+                var viewport = page.getViewport({ scale: scale });
+                canvas.height = viewport.height;
+                canvas.width = viewport.width;
+                fabricCanvas.setWidth(canvas.width);
+                fabricCanvas.setHeight(canvas.height);
+
+                var renderContext = {
+                    canvasContext: ctx,
+                    viewport: viewport
+                };
+                page.render(renderContext).promise.then(function() {
+                    fabricCanvas.setBackgroundImage(canvas.toDataURL(), fabricCanvas.renderAll.bind(fabricCanvas));
+                    saveState(); // Save initial state
+                });
+
+                document.getElementById('page-num').textContent = `Page ${num} / ${pdfDoc.numPages}`;
+            });
+        }
+
+        pdfjsLib.getDocument(url).promise.then(function(pdfDoc_) {
+            pdfDoc = pdfDoc_;
+            renderPage(pageNum);
+
+            // Load saved canvas state
+            const savedState = "{{ pdf.canvas_data|escapejs }}";
+            if (savedState) {
+                fabricCanvas.loadFromJSON(savedState, fabricCanvas.renderAll.bind(fabricCanvas));
+                saveState(); // Save state after loading
+            }
+        });
+
+
+        function showTextToolbar(textObject) {
+            var toolbar = $('.text-toolbar');
+            toolbar.show();
+            var boundingRect = textObject.getBoundingRect();
+            toolbar.css({
+                left: boundingRect.left + 'px',
+                top: (boundingRect.top - 50) + 'px'
+            });
+
+            $('#font-family').val(textObject.fontFamily);
+            $('#font-size').val(textObject.fontSize);
+            $('#font-color').val(rgbToHex(textObject.fill));
+            $('#bg-color').val(rgbToHex(textObject.backgroundColor));
+
+            $('#font-family').off().on('change', function() {
+                textObject.set('fontFamily', $(this).val());
+                fabricCanvas.renderAll();
+                saveState();
+            });
+
+            $('#font-size').off().on('change', function() {
+                textObject.set('fontSize', $(this).val());
+                fabricCanvas.renderAll();
+                saveState();
+            });
+
+            $('#font-color').off().on('change', function() {
+                textObject.set('fill', $(this).val());
+                fabricCanvas.renderAll();
+                saveState();
+            });
+
+            $('#bg-color').off().on('change', function() {
+                textObject.set('backgroundColor', $(this).val());
+                fabricCanvas.renderAll();
+                saveState();
+            });
+
+            $('#bold').off().on('click', function() {
+                textObject.set('fontWeight', textObject.fontWeight === 'bold' ? 'normal' : 'bold');
+                fabricCanvas.renderAll();
+                saveState();
+            });
+
+            $('#italic').off().on('click', function() {
+                textObject.set('fontStyle', textObject.fontStyle === 'italic' ? 'normal' : 'italic');
+                fabricCanvas.renderAll();
+                saveState();
+            });
+
+            $('#underline').off().on('click', function() {
+                textObject.set('underline', !textObject.underline);
+                fabricCanvas.renderAll();
+                saveState();
+            });
+
+            $('#delete-text').off().on('click', function() {
+                fabricCanvas.remove(textObject);
+                fabricCanvas.renderAll();
+                saveState();
+                $('.text-toolbar').hide();
+            });
+        }
+
+        function showDrawToolbar() {
+            var toolbar = $('.draw-toolbar');
+            toolbar.show();
+            toolbar.css({
+                left: '50px',
+                top: '50px'
+            });
+
+            $('#draw-thickness').off().on('change', function() {
+                fabricCanvas.freeDrawingBrush.width = parseInt($(this).val(), 10) || 1;
+            });
+
+            $('#draw-opacity').off().on('change', function() {
+                fabricCanvas.freeDrawingBrush.opacity = parseFloat($(this).val()) || 1;
+            });
+
+            $('#draw-color').off().on('change', function() {
+                fabricCanvas.freeDrawingBrush.color = $(this).val();
+            });
+        }
+
+        function showEraseToolbar() {
+            var toolbar = $('.erase-toolbar');
+            toolbar.show();
+            toolbar.css({
+                left: '50px',
+                top: '50px'
+            });
+
+            $('#erase-thickness').off().on('change', function() {
+                fabricCanvas.freeDrawingBrush.width = parseInt($(this).val(), 10) || 1;
+            });
+        }
+
+        $('#addText').click(function() {
+            var text = new fabric.IText('Sample Text', { left: 100, top: 100 });
+            fabricCanvas.add(text);
+            saveState();
+            showTextToolbar(text);
+        });
+
+        $('#addImage').click(function() {
+            var input = $('<input type="file" accept="image/*">');
+            input.on('change', function(e) {
+                var file = e.target.files[0];
+                var reader = new FileReader();
+                reader.onload = function(f) {
+                    var img = new Image();
+                    img.src = f.target.result;
+                    img.onload = function() {
+                        var fabricImg = new fabric.Image(img);
+                        fabricCanvas.add(fabricImg);
+                        saveState();
+                    }
+                }
+                reader.readAsDataURL(file);
+            });
+            input.click();
+        });
+
+        $('#draw').click(function() {
+            fabricCanvas.isDrawingMode = !fabricCanvas.isDrawingMode;
+            fabricCanvas.freeDrawingBrush = new fabric['PencilBrush'](fabricCanvas);
+            showDrawToolbar();
+        });
+
+        $('#highlight').click(function() {
+            fabricCanvas.isDrawingMode = !fabricCanvas.isDrawingMode;
+            fabricCanvas.freeDrawingBrush = new fabric['SprayBrush'](fabricCanvas);
+            fabricCanvas.freeDrawingBrush.color = 'yellow';
+            fabricCanvas.freeDrawingBrush.width = 10;
+            showDrawToolbar();
+        });
+
+        $('#erase').click(function() {
+            fabricCanvas.isDrawingMode = !fabricCanvas.isDrawingMode;
+            fabricCanvas.freeDrawingBrush = new fabric['PencilBrush'](fabricCanvas);
+            fabricCanvas.freeDrawingBrush.color = 'white';
+            showEraseToolbar();
+        });
+
+        $('#undo').click(function() {
+            if (undoStack.length > 0) {
+                redoStack.push(undoStack.pop());
+                var canvasState = undoStack[undoStack.length - 1];
+                if (canvasState) {
+                    fabricCanvas.loadFromJSON(canvasState, fabricCanvas.renderAll.bind(fabricCanvas));
+                }
+            }
+        });
+
+        $('#redo').click(function() {
+            if (redoStack.length > 0) {
+                var canvasState = redoStack.pop();
+                if (canvasState) {
+                    undoStack.push(canvasState);
+                    fabricCanvas.loadFromJSON(canvasState, fabricCanvas.renderAll.bind(fabricCanvas));
+                }
+            }
+        });
+
+        $('#zoomIn').click(function() {
+            scale += 0.1;
+            renderPage(pageNum);
+            syncCanvasObjects();
+        });
+
+        $('#zoomOut').click(function() {
+            scale = Math.max(scale - 0.1, 0.5);
+            renderPage(pageNum);
+            syncCanvasObjects();
+        });
+
+        function syncCanvasObjects() {
+            var objects = fabricCanvas.getObjects();
+            objects.forEach(function(obj) {
+                obj.scaleX *= scale;
+                obj.scaleY *= scale;
+                obj.left *= scale;
+                obj.top *= scale;
+                obj.setCoords();
+            });
+            fabricCanvas.renderAll();
+        }
+
+        $('#save').click(function() {
+            fabricCanvas.discardActiveObject().renderAll();
+            var json = JSON.stringify(fabricCanvas.toJSON());
+            $.ajax({
+                url: '{% url "save_pdf" pdf.id %}',
+                type: 'POST',
+                data: { 
+                    canvas: json,
+                    csrfmiddlewaretoken: '{{ csrf_token }}'
+                },
+                success: function(response) {
+                    alert('Saved successfully');
+                },
+                error: function(response) {
+                    alert('Failed to save. Please try again.');
+                }
+            });
+        });
+
+        $('#export').click(async function() {
+            const existingPdfBytes = await fetch(url).then(res => res.arrayBuffer());
+            const pdfDoc = await PDFLib.PDFDocument.load(existingPdfBytes);
+            const pages = pdfDoc.getPages();
+            const firstPage = pages[0];
+
+            const pngImageBytes = fabricCanvas.toDataURL('image/png');
+            const pngImage = await pdfDoc.embedPng(pngImageBytes);
+            const { width, height } = firstPage.getSize();
+            firstPage.drawImage(pngImage, {
+                x: 0,
+                y: 0,
+                width: width,
+                height: height,
+            });
+
+            const pdfBytes = await pdfDoc.save();
+            const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'edited.pdf';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        });
+
+        $('#prev').click(function() {
+            if (pageNum <= 1) {
+                return;
+            }
+            pageNum--;
+            renderPage(pageNum);
+        });
+
+        $('#next').click(function() {
+            if (pageNum >= pdfDoc.numPages) {
+                return;
+            }
+            pageNum++;
+            renderPage(pageNum);
+        });
+
+        // Hide toolbars when clicking outside
+        $(document).click(function(e) {
+            if (!$(e.target).closest(' .draw-toolbar, .erase-toolbar, #addText, #draw, #erase').length) {
+                $('.draw-toolbar, .erase-toolbar').hide();
+            }
+        });
+
+        // Functionality for converting PDF to Word
+$('#convertWord').click(async function() {
+    const existingPdfBytes = await fetch(url).then(res => res.arrayBuffer());
+    const pdfDoc = await PDFLib.PDFDocument.load(existingPdfBytes);
+    const pages = pdfDoc.getPages();
+    
+    const doc = new docx.Document();
+    
+    for (const page of pages) {
+        const { width, height } = page.getSize();
+        const canvas = document.createElement('canvas');
+        canvas.width = width;
+        canvas.height = height;
+        const context = canvas.getContext('2d');
+
+        await page.render({canvasContext: context, viewport: page.getViewport({ scale: 1 })}).promise;
+
+        const pngImageBytes = canvas.toDataURL('image/png');
+        const image = new docx.ImageRun({
+            data: pngImageBytes.split(',')[1], // Strip the data URL prefix
+            transformation: { width, height },
+        });
+        const paragraph = new docx.Paragraph();
+        paragraph.addRun(image);
+        doc.addParagraph(paragraph);
+    }
+
+    const packer = new docx.Packer();
+    const buffer = await packer.toBuffer(doc);
+    const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
+    const wordUrl = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = wordUrl;
+    a.download = 'converted.docx';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+});
+
+// Functionality for converting PDF to Excel
+$('#convertExcel').click(async function() {
+    const workbook = new ExcelJS.Workbook();
+    const worksheet = workbook.addWorksheet('PDF Data');
+
+    const existingPdfBytes = await fetch(url).then(res => res.arrayBuffer());
+    const pdfDoc = await PDFLib.PDFDocument.load(existingPdfBytes);
+    const pages = pdfDoc.getPages();
+
+    for (const [i, page] of pages.entries()) {
+        const { width, height } = page.getSize();
+        const canvas = document.createElement('canvas');
+        canvas.width = width;
+        canvas.height = height;
+        const context = canvas.getContext('2d');
+
+        await page.render({canvasContext: context, viewport: page.getViewport({ scale: 1 })}).promise;
+
+        const pngImageBytes = canvas.toDataURL('image/png');
+        const imageId = workbook.addImage({
+            base64: pngImageBytes.split(',')[1], // Strip the data URL prefix
+            extension: 'png',
+        });
+
+        worksheet.addRow([`Page ${i + 1}`]);
+        worksheet.addImage(imageId, {
+            tl: { col: 0, row: worksheet.lastRow.number },
+            ext: { width, height },
+        });
+    }
+
+    const buffer = await workbook.xlsx.writeBuffer();
+    const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+    const excelUrl = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = excelUrl;
+    a.download = 'converted.xlsx';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+});
+
+// Functionality for compressing images/files
+$('#compress').click(function() {
+    const input = $('<input type="file" accept="image/*,application/pdf">');
+    input.on('change', function(e) {
+        const file = e.target.files[0];
+        new Compressor(file, {
+            quality: 0.6,
+            success(result) {
+                const url = URL.createObjectURL(result);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `compressed_${file.name}`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+            },
+            error(err) {
+                console.error(err.message);
+            },
+        });
+    });
+    input.click();
+});
+
+    </script>
+</body>
+</html>
