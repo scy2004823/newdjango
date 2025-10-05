@@ -1,0 +1,95 @@
+/* ===========================
+   Global Layout & Footer Fix
+=========================== */
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+    min-height: 100vh;
+}
+
+/* Card Styling */
+.card {
+    border-radius: 12px;
+    max-width: 800px;
+    margin: auto;
+    background: #fff;
+}
+
+/* Headings */
+h2 {
+    font-weight: bold;
+    color: #0d6efd;
+    text-align: center;
+}
+
+/* Buttons */
+.btn {
+    font-weight: 600;
+    border-radius: 8px;
+    transition: all 0.2s ease-in-out;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+}
+
+/* Tables */
+.table {
+    margin-top: 20px;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.table th {
+    background-color: #212529 !important;
+    color: #fff;
+    text-align: center;
+}
+
+.table td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+/* Totals Section */
+.mt-3 p {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #222;
+}
+
+/* Form Inputs */
+input.form-control {
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+/* Navbar */
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.25rem;
+}
+
+.nav-link {
+    font-weight: 500;
+}
+
+/* Footer */
+footer {
+    margin-top: auto;   /* Pushes footer to bottom */
+    background: #212529;
+    color: #fff;
+    text-align: center;
+    padding: 12px 0;
+    font-size: 0.9rem;
+}

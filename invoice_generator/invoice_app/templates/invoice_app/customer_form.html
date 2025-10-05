@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Invoice Generator</title>
+  <link rel="icon" type="image/x-icon" href="{% static 'invoice_app/image/logo.png' %}">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'invoice_app/css/style.css' %}">
+</head>
+<body class="bg-light">
+
+  <!-- ================= HEADER / NAVBAR ================= -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <!-- Brand -->
+      <a class="navbar-brand fw-bold" href="#">InvoiceGenerator</a>
+
+      <!-- Mobile toggle -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Nav Links -->
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link active" href="#">Home</a>
+          </li>
+          
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ================= MAIN FORM ================= -->
+  <div class="container py-5">
+    <div class="card shadow-lg p-4">
+      <h2 class="mb-4 text-center text-primary"> Enter Customer Details</h2>
+
+      <form method="POST">
+        {% csrf_token %}
+        <div class="mb-3">
+          <label for="name" class="form-label">Customer Name</label>
+          <input type="text" name="name" id="name" class="form-control" placeholder="Enter customer name" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="mobile" class="form-label">Mobile Number</label>
+          <input type="text" name="mobile" id="mobile" class="form-control" placeholder="Enter mobile number" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100">Next →</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="bg-dark text-white text-center py-3 mt-auto">
+    <div class="container">
+      <p class="mb-0">&copy; 2025 InvoiceGenerator. All Rights Reserved.</p>
+      <small>Made with  using Django & Bootstrap</small>
+    </div>
+  </footer>
+
+  <!-- ================= BOOTSTRAP JS ================= -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="{% static 'invoice_app/js/script.js' %}"></script>
+</body>
+</html>

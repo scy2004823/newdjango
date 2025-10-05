@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Invoice PDF</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      font-size: 12px;
+      margin: 20px;
+    }
+    h2 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 20px;
+    }
+    .customer-info {
+      margin-bottom: 15px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    th, td {
+      border: 1px solid #444;
+      padding: 6px;
+      text-align: center;
+    }
+    th {
+      background-color: #444;
+      color: white;
+    }
+    .totals {
+      margin-top: 15px;
+      font-size: 13px;
+    }
+    .totals p {
+      margin: 4px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Invoice #{{ invoice.id }}</h2>
+
+  <div class="customer-info">
+    <p><strong>Customer:</strong> {{ invoice.customer.name }}</p>
+    <p><strong>Mobile:</strong> {{ invoice.customer.mobile }}</p>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Product</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Subtotal</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in items %}
+      <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ item.product.name }}</td>
+        <td>{{ item.quantity }}</td>
+        <td>{{ item.product.price }}</td>
+        <td>{{ item.subtotal }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <div class="totals">
+    <p><strong>Total Products:</strong> {{ total_products }}</p>
+    <p><strong>Total Amount:</strong> {{ total_amount }}</p>
+  </div>
+
+</body>
+</html>
