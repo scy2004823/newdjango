@@ -1,0 +1,433 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors Game</title>
+    <link rel="stylesheet" href="{% static 'game/css/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Rock Paper Scissors</h1>
+            <p>Choose your weapon and play against the computer!</p>
+        </header>
+
+        <div class="game-area">
+            <!-- Game Mode Selection -->
+            <div class="mode-selection">
+                <button id="manual-mode-btn" class="mode-btn active">Manual Play</button>
+                <button id="autoplay-mode-btn" class="mode-btn">Autoplay Mode</button>
+            </div>
+
+            <!-- Manual Play Section -->
+            <div id="manual-play-section" class="play-section">
+                <!-- Player Choice Section -->
+                <div class="player-section">
+                    <h2>Your Choice</h2>
+                    <div class="choices">
+                        <button class="choice-btn" data-choice="rock">
+                            <img src="{% static 'game/icons/rock.svg' %}" alt="Rock">
+                            <span>Rock</span>
+                        </button>
+                        <button class="choice-btn" data-choice="paper">
+                            <img src="{% static 'game/icons/paper.svg' %}" alt="Paper">
+                            <span>Paper</span>
+                        </button>
+                        <button class="choice-btn" data-choice="scissors">
+                            <img src="{% static 'game/icons/scissors.svg' %}" alt="Scissors">
+                            <span>Scissors</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Autoplay Section -->
+            <div id="autoplay-section" class="play-section" style="display: none;">
+                <div class="autoplay-controls">
+                    <h2>Autoplay Mode (Computer vs Computer)</h2>
+                    <div class="autoplay-settings">
+                        <div class="setting-group">
+                            <label for="rounds-input">Number of Rounds:</label>
+                            <input type="number" id="rounds-input" value="10" min="1" max="100">
+                        </div>
+                        <div class="setting-group">
+                            <label for="speed-input">Speed (ms):</label>
+                            <input type="number" id="speed-input" value="1000" min="100" max="5000" step="100">
+                        </div>
+                        <button id="start-autoplay-btn" class="autoplay-btn">Start Autoplay</button>
+                        <button id="stop-autoplay-btn" class="autoplay-btn" style="display: none;">Stop Autoplay</button>
+                    </div>
+                    
+                    <div class="autoplay-display">
+                        <div class="computer-vs-computer">
+                            <div class="computer-player">
+                                <h3>Computer 1</h3>
+                                <div class="choice-display" id="computer1-display">
+                                    <img id="computer1-icon" src="" alt="">
+                                    <span id="computer1-text">Ready</span>
+                                </div>
+                            </div>
+                            
+                            <div class="vs-text">VS</div>
+                            
+                            <div class="computer-player">
+                                <h3>Computer 2</h3>
+                                <div class="choice-display" id="computer2-display">
+                                    <img id="computer2-icon" src="" alt="">
+                                    <span id="computer2-text">Ready</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="autoplay-status">
+                            <div id="autoplay-result" class="autoplay-result"></div>
+                            <div id="autoplay-progress" class="autoplay-progress"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Game Result Section -->
+            <div class="result-section" id="result-section" style="display: none;">
+                <div class="vs-section">
+                    <div class="player-choice">
+                        <h3>You</h3>
+                        <div class="choice-display" id="player-display">
+                            <img id="player-icon" src="" alt="">
+                            <span id="player-text"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="vs-text">VS</div>
+                    
+                    <div class="computer-choice">
+                        <h3>Computer</h3>
+                        <div class="choice-display" id="computer-display">
+                            <img id="computer-icon" src="" alt="">
+                            <span id="computer-text"></span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="result-display">
+                    <h2 id="result-text"></h2>
+                    <button id="play-again-btn" class="play-again-btn">Play Again</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Statistics Section -->
+        <div class="stats-section">
+            <h2>Game Statistics</h2>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-number" id="total-games">{{ stats.total_games }}</span>
+                    <span class="stat-label">Total Games</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="wins">{{ stats.wins }}</span>
+                    <span class="stat-label">Wins</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="losses">{{ stats.losses }}</span>
+                    <span class="stat-label">Losses</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="draws">{{ stats.draws }}</span>
+                    <span class="stat-label">Draws</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="win-percentage">{{ stats.win_percentage }}%</span>
+                    <span class="stat-label">Win Rate</span>
+                </div>
+            </div>
+            
+            <form method="post" action="{% url 'game:reset_stats' %}" class="reset-form">
+                {% csrf_token %}
+                <button type="submit" class="reset-btn" onclick="return confirm('Are you sure you want to reset all statistics?')">
+                    Reset Statistics
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const choiceBtns = document.querySelectorAll('.choice-btn');
+        const resultSection = document.getElementById('result-section');
+        const playerIcon = document.getElementById('player-icon');
+        const playerText = document.getElementById('player-text');
+        const computerIcon = document.getElementById('computer-icon');
+        const computerText = document.getElementById('computer-text');
+        const resultText = document.getElementById('result-text');
+        const playAgainBtn = document.getElementById('play-again-btn');
+
+        // Mode switching elements
+        const manualModeBtn = document.getElementById('manual-mode-btn');
+        const autoplayModeBtn = document.getElementById('autoplay-mode-btn');
+        const manualPlaySection = document.getElementById('manual-play-section');
+        const autoplaySection = document.getElementById('autoplay-section');
+
+        // Autoplay elements
+        const startAutoplayBtn = document.getElementById('start-autoplay-btn');
+        const stopAutoplayBtn = document.getElementById('stop-autoplay-btn');
+        const roundsInput = document.getElementById('rounds-input');
+        const speedInput = document.getElementById('speed-input');
+        const computer1Icon = document.getElementById('computer1-icon');
+        const computer1Text = document.getElementById('computer1-text');
+        const computer2Icon = document.getElementById('computer2-icon');
+        const computer2Text = document.getElementById('computer2-text');
+        const autoplayResult = document.getElementById('autoplay-result');
+        const autoplayProgress = document.getElementById('autoplay-progress');
+
+        // Statistics elements
+        const totalGamesEl = document.getElementById('total-games');
+        const winsEl = document.getElementById('wins');
+        const lossesEl = document.getElementById('losses');
+        const drawsEl = document.getElementById('draws');
+        const winPercentageEl = document.getElementById('win-percentage');
+
+        // Autoplay state
+        let autoplayInterval = null;
+        let autoplayActive = false;
+
+        // Icon mapping
+        const iconMap = {
+            'rock': "{% static 'game/icons/rock.svg' %}",
+            'paper': "{% static 'game/icons/paper.svg' %}",
+            'scissors': "{% static 'game/icons/scissors.svg' %}"
+        };
+
+        // Mode switching
+        manualModeBtn.addEventListener('click', function() {
+            switchToManualMode();
+        });
+
+        autoplayModeBtn.addEventListener('click', function() {
+            switchToAutoplayMode();
+        });
+
+        function switchToManualMode() {
+            manualModeBtn.classList.add('active');
+            autoplayModeBtn.classList.remove('active');
+            manualPlaySection.style.display = 'block';
+            autoplaySection.style.display = 'none';
+            resultSection.style.display = 'none';
+            stopAutoplay();
+        }
+
+        function switchToAutoplayMode() {
+            autoplayModeBtn.classList.add('active');
+            manualModeBtn.classList.remove('active');
+            manualPlaySection.style.display = 'none';
+            autoplaySection.style.display = 'block';
+            resultSection.style.display = 'none';
+        }
+
+        // Manual play functionality
+        choiceBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const choice = this.dataset.choice;
+                playGame(choice);
+            });
+        });
+
+        playAgainBtn.addEventListener('click', function() {
+            resultSection.style.display = 'none';
+            // Re-enable choice buttons
+            choiceBtns.forEach(btn => {
+                btn.disabled = false;
+                btn.classList.remove('disabled');
+            });
+        });
+
+        // Autoplay functionality
+        startAutoplayBtn.addEventListener('click', function() {
+            startAutoplay();
+        });
+
+        stopAutoplayBtn.addEventListener('click', function() {
+            stopAutoplay();
+        });
+
+        async function startAutoplay() {
+            const rounds = parseInt(roundsInput.value) || 10;
+            const speed = parseInt(speedInput.value) || 1000;
+
+            autoplayActive = true;
+            startAutoplayBtn.style.display = 'none';
+            stopAutoplayBtn.style.display = 'inline-block';
+            roundsInput.disabled = true;
+            speedInput.disabled = true;
+
+            autoplayProgress.textContent = `Starting autoplay for ${rounds} rounds...`;
+
+            try {
+                const response = await fetch("{% url 'game:autoplay_game' %}", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ 
+                        rounds: rounds,
+                        speed: speed 
+                    })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    displayAutoplayResults(data, speed);
+                } else {
+                    console.error('Error:', data.error);
+                    autoplayProgress.textContent = 'Error: ' + data.error;
+                    stopAutoplay();
+                }
+            } catch (error) {
+                console.error('Network error:', error);
+                autoplayProgress.textContent = 'Network error occurred.';
+                stopAutoplay();
+            }
+        }
+
+        function displayAutoplayResults(data, speed) {
+            const results = data.results;
+            let currentRound = 0;
+
+            autoplayInterval = setInterval(() => {
+                if (!autoplayActive || currentRound >= results.length) {
+                    stopAutoplay();
+                    autoplayProgress.textContent = `Autoplay completed! ${data.rounds_played} rounds played.`;
+                    updateStats(data.stats);
+                    return;
+                }
+
+                const result = results[currentRound];
+                
+                // Display current round
+                computer1Icon.src = iconMap[result.computer1_choice];
+                computer1Text.textContent = result.computer1_choice.charAt(0).toUpperCase() + result.computer1_choice.slice(1);
+                
+                computer2Icon.src = iconMap[result.computer2_choice];
+                computer2Text.textContent = result.computer2_choice.charAt(0).toUpperCase() + result.computer2_choice.slice(1);
+
+                // Display result
+                let resultText = '';
+                let resultClass = '';
+                if (result.result === 'win') {
+                    resultText = 'Computer 1 Wins!';
+                    resultClass = 'result-win';
+                } else if (result.result === 'lose') {
+                    resultText = 'Computer 2 Wins!';
+                    resultClass = 'result-lose';
+                } else {
+                    resultText = "It's a Draw!";
+                    resultClass = 'result-draw';
+                }
+
+                autoplayResult.textContent = resultText;
+                autoplayResult.className = 'autoplay-result ' + resultClass;
+                autoplayProgress.textContent = `Round ${currentRound + 1} of ${results.length}`;
+
+                currentRound++;
+            }, speed);
+        }
+
+        function stopAutoplay() {
+            autoplayActive = false;
+            if (autoplayInterval) {
+                clearInterval(autoplayInterval);
+                autoplayInterval = null;
+            }
+            
+            startAutoplayBtn.style.display = 'inline-block';
+            stopAutoplayBtn.style.display = 'none';
+            roundsInput.disabled = false;
+            speedInput.disabled = false;
+            
+            // Reset display
+            computer1Icon.src = '';
+            computer1Text.textContent = 'Ready';
+            computer2Icon.src = '';
+            computer2Text.textContent = 'Ready';
+            autoplayResult.textContent = '';
+        }
+
+        async function playGame(playerChoice) {
+            // Disable choice buttons
+            choiceBtns.forEach(btn => {
+                btn.disabled = true;
+                btn.classList.add('disabled');
+            });
+
+            try {
+                const response = await fetch("{% url 'game:play_game' %}", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ choice: playerChoice })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    displayResult(data);
+                    updateStats(data.stats);
+                } else {
+                    console.error('Error:', data.error);
+                    alert('An error occurred. Please try again.');
+                    // Re-enable buttons on error
+                    choiceBtns.forEach(btn => {
+                        btn.disabled = false;
+                        btn.classList.remove('disabled');
+                    });
+                }
+            } catch (error) {
+                console.error('Network error:', error);
+                alert('Network error. Please try again.');
+                // Re-enable buttons on error
+                choiceBtns.forEach(btn => {
+                    btn.disabled = false;
+                    btn.classList.remove('disabled');
+                });
+            }
+        }
+
+        function displayResult(data) {
+            // Set player choice
+            playerIcon.src = iconMap[data.player_choice];
+            playerText.textContent = data.player_choice.charAt(0).toUpperCase() + data.player_choice.slice(1);
+
+            // Set computer choice
+            computerIcon.src = iconMap[data.computer_choice];
+            computerText.textContent = data.computer_choice.charAt(0).toUpperCase() + data.computer_choice.slice(1);
+
+            // Set result text and styling
+            const resultTextEl = document.getElementById('result-text');
+            if (data.result === 'win') {
+                resultText.textContent = 'You Win!';
+                resultTextEl.className = 'result-win';
+            } else if (data.result === 'lose') {
+                resultText.textContent = 'You Lose!';
+                resultTextEl.className = 'result-lose';
+            } else {
+                resultText.textContent = "It's a Draw!";
+                resultTextEl.className = 'result-draw';
+            }
+
+            // Show result section
+            resultSection.style.display = 'block';
+        }
+
+        function updateStats(stats) {
+            totalGamesEl.textContent = stats.total_games;
+            winsEl.textContent = stats.wins;
+            lossesEl.textContent = stats.losses;
+            drawsEl.textContent = stats.draws;
+            winPercentageEl.textContent = stats.win_percentage + '%';
+        }
+    </script>
+</body>
+</html>
