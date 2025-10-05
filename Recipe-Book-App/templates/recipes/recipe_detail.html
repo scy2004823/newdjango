@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ recipe.title }} - Recipe Book{% endblock %}
+
+{% block content %}
+<center>
+    <h1 style="font-size: 2.5em;">{{ recipe.title|upper }}</h1>
+    <p style="background: #FF00FF; color: #FFF; padding: 10px; display: inline-block; border: 3px solid #000;">
+        Category: {{ recipe.category.name }}
+    </p>
+</center>
+
+<hr>
+
+<!-- Recipe Info Table -->
+<table width="100%" cellpadding="15" style="background: #E0FFFF; border: 5px groove #00CED1; margin: 20px 0;">
+    <tr>
+        <td bgcolor="#00CED1" colspan="4" style="color: #FFF; font-weight: bold; text-align: center; font-size: 20px;">
+            RECIPE INFORMATION
+        </td>
+    </tr>
+    <tr>
+        <td width="25%" align="center" bgcolor="#FFF8DC">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50'%3E%3Ctext x='0' y='40' font-size='40'%3E⏰%3C/text%3E%3C/svg%3E" alt="clock"><br>
+            <b>Prep Time</b><br>
+            <span style="font-size: 24px; color: #FF1493;">{{ recipe.prep_time }}</span> min
+        </td>
+        <td width="25%" align="center" bgcolor="#FFE4E1">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50'%3E%3Ctext x='0' y='40' font-size='40'%3E🔥%3C/text%3E%3C/svg%3E" alt="fire"><br>
+            <b>Cook Time</b><br>
+            <span style="font-size: 24px; color: #FF6347;">{{ recipe.cook_time }}</span> min
+        </td>
+        <td width="25%" align="center" bgcolor="#F0FFF0">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50'%3E%3Ctext x='0' y='40' font-size='40'%3E👥%3C/text%3E%3C/svg%3E" alt="people"><br>
+            <b>Servings</b><br>
+            <span style="font-size: 24px; color: #00FF00;">{{ recipe.servings }}</span>
+        </td>
+        <td width="25%" align="center" bgcolor="#FFFACD">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50'%3E%3Ctext x='0' y='40' font-size='40'%3E⭐%3C/text%3E%3C/svg%3E" alt="star"><br>
+            <b>Difficulty</b><br>
+            <span style="font-size: 24px; color: #FFD700;">{{ recipe.get_difficulty_display }}</span>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="4" bgcolor="#FFFFFF" style="padding: 20px;">
+            <b>Description:</b><br>
+            <p style="font-size: 16px; margin-top: 10px;">{{ recipe.description }}</p>
+        </td>
+    </tr>
+</table>
+
+<!-- Action Buttons -->
+<center style="margin: 20px 0;">
+    <a href="{% url 'recipe_update' recipe.pk %}" class="btn btn-warning">EDIT RECIPE</a>
+    <a href="{% url 'recipe_delete' recipe.pk %}" class="btn btn-danger">DELETE RECIPE</a>
+    <a href="{% url 'home' %}" class="btn btn-secondary">BACK TO LIST</a>
+</center>
+
+<hr>
+
+<!-- Ingredients -->
+<table width="100%" cellpadding="15" style="background: #F0E68C; border: 5px double #FFD700; margin: 20px 0;">
+    <tr>
+        <td bgcolor="#FFD700" style="font-weight: bold; text-align: center; font-size: 22px;">
+            >>> INGREDIENTS <<<
+        </td>
+    </tr>
+    <tr>
+        <td bgcolor="#FFFACD">
+            <ul style="font-size: 16px; line-height: 1.8;">
+                {% for ingredient in ingredients_list %}
+                {% if ingredient.strip %}
+                <li><b>✓</b> {{ ingredient }}</li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+        </td>
+    </tr>
+</table>
+
+<!-- Instructions -->
+<table width="100%" cellpadding="15" style="background: #98FB98; border: 5px double #00FF00; margin: 20px 0;">
+    <tr>
+        <td bgcolor="#00FF00" style="font-weight: bold; text-align: center; font-size: 22px;">
+            >>> COOKING INSTRUCTIONS <<<
+        </td>
+    </tr>
+    <tr>
+        <td bgcolor="#F0FFF0" style="white-space: pre-line; font-size: 16px; line-height: 1.8;">
+{{ recipe.instructions }}
+        </td>
+    </tr>
+</table>
+
+<!-- Metadata -->
+<table width="100%" cellpadding="10" style="background: #D3D3D3; border: 3px solid #000; margin: 20px 0;">
+    <tr>
+        <td>
+            <small>
+                <b>Created:</b> {{ recipe.created_at|date:"F d, Y" }} | 
+                <b>Last Updated:</b> {{ recipe.updated_at|date:"F d, Y" }}
+            </small>
+        </td>
+    </tr>
+</table>
+
+<center>
+    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='30'%3E%3Ctext x='50' y='20' fill='%23FF1493' font-size='16'%3E*** Happy Cooking! ***%3C/text%3E%3C/svg%3E" alt="decoration">
+</center>
+{% endblock %}
