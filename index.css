@@ -1,3 +1,6 @@
+
+
+
 .custom-box {
   background-color: #f0f0f0;
   padding: 20px;
@@ -11,7 +14,7 @@
 }
 
 body {
-  font-family: 'Poppins', sans-serif;
+     font-family: Palatino, "Palatino Linotype", "Book Antiqua", "Hoefler Text", Georgia, "Lucida Bright", Cambria, Times, "Times New Roman", serif;
   padding-top: 120px;
   background-size: 150px 150px;
 }
@@ -23,8 +26,8 @@ svg {
   width: 100%;
   box-sizing: border-box;
   display: block;
-  background-color: #007d32;
-  background-image: linear-gradient(to bottom, rgba(0, 160, 45, 0.964), #003808);
+  background-color: #272c27ef;
+  background-image: linear-gradient(to bottom, #001f08, #272c27);
   z-index: -1;
 }
 
@@ -67,6 +70,7 @@ nav {
 /* Styling for the section with background image */
 .hero-section {
   /* Add your image URL here */
+  font-family: "Roboto", Corbel, Avenir, "Lucida Grande", "Lucida Sans", sans-serif;
   background-size: cover;
   background-position: center;
   padding: 30px 0;
@@ -79,11 +83,13 @@ nav {
 }
 
 .hero-text {
+  font-family: "Roboto", Corbel, Avenir, "Lucida Grande", "Lucida Sans", sans-serif;
   font-size: 2rem;
   margin-bottom: 20px;
 }
 
 .hero-text::first-line {
+  font-family: "Roboto", Corbel, Avenir, "Lucida Grande", "Lucida Sans", sans-serif;
   float: left;
 }
 
@@ -97,9 +103,13 @@ nav {
 
 .custom-card a {
   text-decoration: none;
-  color: black;
+  color: rgb(255, 255, 255);
   text-wrap: balance;
+  font-family:  "Palatino", "Palatino Linotype";
+  font-weight: 500;
+  letter-spacing: 0.3px;
 }
+
 
 .custom-button {
   background: linear-gradient(135deg, #56ddcd, #33b5a6);
@@ -202,7 +212,7 @@ nav {
   transform: translateX(-50%);
   width: 100%;
   max-width: 1200px;
-  background: linear-gradient(135deg, #0f4017, #008015);
+  background: linear-gradient(135deg, #0C4B33, #007749);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   z-index: 1000;
@@ -480,7 +490,7 @@ nav {
   }
 
   .inner-btn:nth-child(2) {
-    background: linear-gradient(135deg, #00ffcc, #0099ff);
+    background: linear-gradient(135deg, #00ffcc, #44b78b);
   }
 
   .inner-btn:nth-child(3) {
@@ -522,7 +532,7 @@ nav {
 
   .menu-item:hover {
     background-color: #f0f0f0;
-    color: #007bff;
+    color: #44b78b;
   }
 
   .menu-item i {
@@ -620,7 +630,7 @@ nav {
   user-select: none;
   padding: 8px 12px;
   border-radius: 8px;
-  background: linear-gradient(135deg, #002b5b, #004080);
+  background: linear-gradient(135deg, #003612, #44b78b);
   box-shadow: 0 4px 8px rgba(0, 43, 91, 0.5);
   width: max-content;
   margin: 0 auto;
