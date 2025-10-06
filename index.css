@@ -14,9 +14,10 @@
 }
 
 body {
-     font-family: Palatino, "Palatino Linotype", "Book Antiqua", "Hoefler Text", Georgia, "Lucida Bright", Cambria, Times, "Times New Roman", serif;
+  font-family: Palatino, "Palatino Linotype", "Book Antiqua", "Hoefler Text", Georgia, "Lucida Bright", Cambria, Times, "Times New Roman", serif;
   padding-top: 120px;
   background-size: 150px 150px;
+  
 }
 
 svg {
@@ -86,11 +87,13 @@ nav {
   font-family: "Roboto", Corbel, Avenir, "Lucida Grande", "Lucida Sans", sans-serif;
   font-size: 2rem;
   margin-bottom: 20px;
+  color: white;
 }
 
 .hero-text::first-line {
   font-family: "Roboto", Corbel, Avenir, "Lucida Grande", "Lucida Sans", sans-serif;
   float: left;
+  color: white;
 }
 
 .hero-section-logo,
@@ -114,7 +117,7 @@ nav {
 .custom-button {
   background: linear-gradient(135deg, #56ddcd, #33b5a6);
   margin-left: 10px;
-  font-size: 20px;
+  font-size: 8px;
   width: max-content;
   display: inline-flex;
   border-radius: 25px;
@@ -133,7 +136,7 @@ nav {
 
 .custom-button a {
   text-decoration: none;
-  color: #545554;
+  color: #a0a0a0;
 }
 
 .custom-button img {
