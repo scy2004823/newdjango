@@ -1,0 +1,15 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<div>
+    <form method="POST" action="">
+        <!-- when ever we are sending a POST req in django..We need to pass the csrf_token...To prevent malicious attacks -->
+        {% csrf_token %}  
+        <!-- form.as_p will put a <p> tag for all the fields so they appear vertically... -->
+        {{form.as_p}}
+        <input type="submit" value="submit">
+    </form>
+</div>
+
+{% endblock %}
