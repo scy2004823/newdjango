@@ -2,723 +2,319 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Django Projects for Beginners</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Django Projects for beginners</title>
+  <!-- ICON || FAVICON -->
+  <link rel="shortcut icon" type="image/png" href="/rp.png" />
+  <!-- FOR IE -->
+  <link rel="apple-touch-icon" type="image/png" href="/rp.png" />
+  <!-- FOR iPhone -->
+  <link rel="icon" type="image/png" href="/rp.png" />
+  <!-- FOR Browser Chrome, Opera, etc -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-
-  <style>
-    nav {
-      background-color: #000000;
-      color: white;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px 20px;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-    }
-
-    .logo img {
-      margin-right: 10px;
-      /* Add spacing between the logo and text */
-    }
-
-    .github-icon img {
-      cursor: pointer;
-      /* Add a pointer cursor to the GitHub icon */
-    }
-
-
-    /* Aesthetic background */
-    body {
-      background: linear-gradient(to bottom, #7117ea, #ea6060, #9544ff);
-      color: white;
-    }
-
-    .navbar {
-
-      margin: 70px 50px 50px 50px;
-      border-radius: 20px;
-      background-color: #000000;
-    }
-
-    nav {
-      background-color: rgba(0, 0, 0, 0.408);
-
-      color: rgba(255, 255, 255, 0.399);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px 20px;
-
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-    }
-
-    .logo img {
-      margin-right: 10px;
-      /* Add spacing between the logo and text */
-    }
-
-    .github-icon img {
-      cursor: pointer;
-      /* Add a pointer cursor to the GitHub icon */
-    }
-
-    /* Styling for the section with background image */
-    .hero-section {
-      background-image: url('your-background-image.jpg');
-      /* Add your image URL here */
-      background-size: cover;
-      background-position: center;
-      padding: 30px 0;
-      text-align: center;
-      color: white;
-    }
-
-    .hero-text {
-      color: #000000;
-      font-size: 3rem;
-      font-weight: bold;
-      text-align: center;
-      margin-bottom: 30px;
-    }
-
-
-
-    #contributors-box {
-      background-color: rgba(255, 255, 255, 0.2);
-      padding: 20px;
-      border-radius: 10px;
-      width: 80%;
-      margin: 0 auto;
-
-    }
-
-    #contributors-list {
-      list-style: none;
-      padding: 0;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-
-    }
-
-    #contributors-list li {
-      flex: 1 1 calc(20% - 40px);
-      text-align: center;
-      margin: 20px;
-    }
-
-    #contributors-list li a {
-      text-decoration: none;
-      color: black;
-      font-size: 20px;
-    }
-
-    #contributors-list li img {
-      border-radius: 50%;
-      object-fit: cover;
-      border: 8px solid rgb(51, 192, 192);
-
-    }
-
-    /* Responsive layout adjustments */
-    @media (max-width: 1200px) {
-      #contributors-list li {
-        flex: 1 1 calc(25% - 40px);
-        /* 4 cards per row for medium screens */
-      }
-    }
-
-    @media (max-width: 768px) {
-      #contributors-list li {
-        flex: 1 1 calc(33.33% - 40px);
-        /* 3 cards per row for smaller screens */
-      }
-    }
-
-    @media (max-width: 480px) {
-      #contributors-list li {
-        flex: 1 1 calc(50% - 40px);
-        /* 2 cards per row for mobile screens */
-      }
-    }
-
-    .custom-navbar {
-      height: 200px;
-      padding: 10px 20px;
-      /* Adjust padding */
-      /* padding-top: 20px; Adjust padding to center content vertically */
-      padding-bottom: 20px;
-      background-color: #343a40;
-      /* Dark background color */
-    }
-
-
-
-    .navbar-brand-content {
-
-      font-weight: bold;
-      display: flex;
-      align-items: center;
-      margin-bottom: 15px;
-      /* Space between logo/title and badges */
-    }
-
-    .github-badges a {
-
-      margin-right: 7px;
-
-      /* Space between badges */
-    }
-
-    .github-badges img {
-      height: 25px;
-    }
-
-    .card {
-      height: 250px;
-      width: 200px;
-      border-radius: 50px;
-      overflow: hidden;
-      background-color: #f3e5f5;
-    }
-
-    .card-title {
-      background-color: #ce93d8;
-      padding: 10px;
-      border-radius: 20px;
-
-    }
-
-    .card-title a {
-      text-decoration: none;
-      color: #000000;
-    }
-
-    .card-body {
-      padding: 15px;
-    }
-
-    .image {
-      display: flex;
-      justify-content: center;
-      margin-top: 10px;
-    }
-
-    .card-img {
-      width: 100px;
-      /* Adjust size as needed */
-      height: 100px;
-      /* Keep the same height for a circle */
-      border-radius: 50%;
-      /* Makes the image circular */
-      object-fit: cover;
-      /* Ensures the image covers the entire circle */
-      border: 2px solid white;
-      /* Optional: Add border for better visibility */
-    }
-
-    .github-link {
-      font-size: larger;
-      position: absolute;
-      top: 10px;
-      right: 30px;
-    }
-  </style>
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" />
+  <link rel="stylesheet" href="./index.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 </head>
 
 <body>
-  <!-- Navbar start -->
+  <div id="logo-div" style="position: fixed; top: 15px; right: 88%; transform: translateX(-50%); z-index: 1000; transition: opacity 0.9s ease;">
+    <img src="./logo-hacktoberfest-12.svg" style="width: 100px; margin-top: 20px;" />
+  </div>
 
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark custom-navbar">
-    <div class="container">
-      <!-- Box containing Logo, Title, and GitHub Badges -->
-      <div class="navbar-content-box">
-        <!-- Logo and Title -->
-        <div class="navbar-brand-content">
-          <a class="navbar-brand" href="#">
-            <img src="./django.png" height="50" alt="Logo" class="mr-2">
-            Django Projects for Beginners
-          </a>
-        </div>
-        <!-- GitHub Badges below the title -->
-        <div class="github-badges">
-          <a href="https://github.com/ianshulx/Django-Projects-for-beginners/stargazers">
-            <img src="https://img.shields.io/github/stars/ianshulx/Django-Projects-for-beginners?style=flat-square"
-              alt="GitHub stars">
-          </a>
-          <a href="https://github.com/ianshulx/Django-Projects-for-beginners/network">
-            <img src="https://img.shields.io/github/forks/ianshulx/Django-Projects-for-beginners?style=flat-square"
-              alt="GitHub forks">
-          </a>
-          <a href="https://github.com/ianshulx/Django-Projects-for-beginners/graphs/contributors">
-            <img
-              src="https://img.shields.io/github/contributors/ianshulx/Django-Projects-for-beginners?style=flat-square"
-              alt="GitHub contributors">
-          </a>
-          <a href="https://github.com/ianshulx/Django-Projects-for-beginners/issues">
-            <img src="https://img.shields.io/github/issues/ianshulx/Django-Projects-for-beginners?style=flat-square"
-              alt="GitHub issues">
-          </a>
-          <a href="https://github.com/ianshulx/Django-Projects-for-beginners/pulls">
-            <img src="https://img.shields.io/github/issues-pr/ianshulx/Django-Projects-for-beginners?style=flat-square"
-              alt="GitHub pull requests">
-          </a>
-          <a href="https://github.com/ianshulx/Django-Projects-for-beginners/watchers">
-            <img src="https://img.shields.io/github/watchers/ianshulx/Django-Projects-for-beginners?style=flat-square"
-              alt="GitHub watchers">
-          </a>
-        </div>
+  <!-- Floating Navbar -->
+  <nav class="floating-navbar">
+
+    <div class="navbar-container">
+      <div class="navbar-left">
+        <img src="./django.png" alt="Django-icon" />
+        <span>Django Projects</span>
+      <img src="./heroicon-animation.dd8cd700.gif" alt="hacktoberfest">
+
       </div>
-      <!-- Navbar toggler button for mobile -->
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+      
 
-      <!-- Navbar links -->
-      <div class="collapse github-link navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="#">Github</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="https://github.com/ianshulx/Django-Projects-for-beginners" target="_blank">
-              <i class="bi bi-github"></i>
-            </a>
-          </li>
+      <!-- Center Section: Navigation Links -->
+
+      <div class="navbar-center">
+        <ul class="navbar-menu">
+          <li><a href="#hero">Home</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#contributors">Contributors</a></li>
+          <li><a href="https://github.com/ianshulx/django-projects-for-beginners" target="_blank">GitHub</a></li>
         </ul>
+      </div>
+
+      <!-- Right Section: Hamburger Menu -->
+      <div class="navbar-right">
+      </div>
+    </div>
+    <div class="button-container-below-navbar">
+      <div id="menu-label" class="menu-label" tabindex="0" role="button" aria-expanded="false"
+        aria-controls="menu-buttons">Menu</div>
+      <div id="menu-buttons" class="inner-buttons hidden">
+        <button class="inner-btn star-btn"
+          onclick="window.open('https://github.com/ianshulx/django-projects-for-beginners/stargazers', '_blank')">
+          <i class="bi bi-star-fill"></i> Star
+        </button>
+        <button class="inner-btn fork-btn"
+          onclick="window.open('https://github.com/ianshulx/django-projects-for-beginners/network/members', '_blank')">
+          <i class="bi bi-code-branch"></i> Fork
+        </button>
+        <button class="inner-btn issues-btn"
+          onclick="window.open('https://github.com/ianshulx/django-projects-for-beginners/issues', '_blank')">
+          <i class="bi bi-exclamation-circle-fill"></i> Issues
+        </button>
+        <button class="inner-btn pr-btn"
+          onclick="window.open('https://github.com/ianshulx/django-projects-for-beginners/pulls', '_blank')">
+          <i class="bi bi-git-pull-request"></i> Pull Requests
+        </button>
+        <button class="inner-btn watchers-btn"
+          onclick="window.open('https://github.com/ianshulx/django-projects-for-beginners/watchers', '_blank')">
+          <i class="bi bi-eye"></i> Watchers
+        </button>
+        <button class="inner-btn contributors-btn"
+          onclick="window.open('https://github.com/ianshulx/django-projects-for-beginners/graphs/contributors', '_blank')">
+          <i class="bi bi-people-fill"></i> Contributors
+        </button>
+        <button class="inner-btn download-btn"
+          onclick="window.open('https://github.com/ianshulx/django-projects-for-beginners/releases', '_blank')">
+          <i class="bi bi-download"></i> Download
+        </button>
+        <button class="inner-btn maintainer-btn" onclick="window.open('https://github.com/ianshulx', '_blank')">
+          <i class="bi bi-person-badge-fill"></i> Maintainer
+        </button>
       </div>
     </div>
   </nav>
 
 
 
-
-  <section>
-    <div class="container mt-5">
-      <div class="row ">
-
-        <h2 class="hero-text">Projects List</h2>
-
-        <!-- Project 1 -->
-
-
-        <div class="col-md-3 col-sm-6 mb-4">
-          <div class="card ">
-            <div class="image">
-              <img src="icons/web-crawler.png"
-                alt="" class="card-img">
-            </div>
-
-            <div class="card-body">
-              <a href="https://github.com/ianshulx/Django-Projects-for-beginners/tree/main/Django%20Web%20Crawler"
-                target="_blank" class="btn"><i class="bi bi-github"></i></a>
-              <h6 class="card-title">
-                <a href="https://github.com/ianshulx/Django-Projects-for-beginners/tree/main/Django%20Web%20Crawler"
-                  target="_blank">
-                  Django Web Crawler</a>
-
-              </h6>
-
-            </div>
-          </div>
-
-        </div>
-
-
-        <div class="col-md-3 col-sm-6 mb-4">
-          <div class="card ">
-            <div class="image">
-              <img src="icons/piggy-bank.png"
-                alt="" class="card-img">
-            </div>
-
-            <div class="card-body">
-              <a href="https://github.com/ianshulx/Django-Projects-for-beginners/tree/main/FinanceTracker"
-                target="_blank" class="btn"><i class="bi bi-github"></i></a>
-              <h6 class="card-title">
-                <a href="https://github.com/ianshulx/Django-Projects-for-beginners/tree/main/FinanceTracker"
-                  target="_blank">
-                  Finance Tracker
-                </a>
-
-              </h6>
-
-            </div>
-
-          </div>
-        </div>
-
-        <div class="col-md-3 col-sm-6 mb-4">
-          <div class="card">
-            <div class="image">
-              <img src="icons/qr-code.png"
-                alt="" class="card-img">
-            </div>
-
-            <div class="card-body">
-              <a href="https://github.com/ianshulx/QR-Code-Generator" target="_blank" class="btn"><i
-                  class="bi bi-github"></i></a>
-              <h6 class="card-title">
-                <a href="http://github.com/ianshulx/QR-Code-Generator" target="_blank">
-                  QR Code Generator
-                </a>
-
-              </h6>
-
-            </div>
-
-          </div>
-        </div>
-
-        <div class="col-md-3 col-sm-6 mb-4">
-          <div class="card">
-            <div class="image">
-              <img src="icons/student.png"
-                alt="" class="card-img">
-            </div>
-
-            <div class="card-body">
-              <a href="https://github.com/ianshulx/Django-Projects-for-beginners/tree/main/Student%20management%20system"
-                target="_blank" class="btn"><i class="bi bi-github"></i></a>
-              <h6 class="card-title">
-                <a href="http://github.com/ianshulx/Django-Projects-for-beginners/tree/main/Student%20management%20system"
-                  target="_blank">
-                  Student Management System
-                </a>
-
-              </h6>
-
-            </div>
-          </div>
-
-        </div>
-
-        <div class="col-md-3 col-sm-6 mb-4">
-          <div class="card">
-            <div class="image">
-              <img src="icons/private-key.png"
-                alt="" class="card-img">
-            </div>
-
-            <div class="card-body">
-              <a href="https://github.com/ianshulx/Django-Projects-for-beginners/tree/main/User%20Authentication%20system"
-                target="_blank" class="btn"><i class="bi bi-github"></i></a>
-
-              <h6 class="card-title">
-                <a href="http://github.com/ianshulx/Django-Projects-for-beginners/tree/main/User%20Authentication%20system"
-                  target="_blank">
-                  User Authentication System
-                </a>
-
-              </h6>
-
-            </div>
-          </div>
-
-        </div>
-
-        <div class="col-md-3 col-sm-6 mb-4">
-          <div class="card">
-            <div class="image">
-              <img src="icons/temperature.png"
-                alt="" class="card-img">
-            </div>
-
-            <div class="card-body">
-              <a href="https://github.com/ianshulx/Django-Projects-for-beginners/tree/main/Weather-Application-Django"
-                target="_blank" class="btn"><i class="bi bi-github"></i></a>
-              <h6 class="card-title">
-                <a href="http://github.com/ianshulx/Django-Projects-for-beginners/tree/main/Weather-Application-Django"
-                  target="_blank">
-                  Weather Application Django
-                </a>
-
-              </h6>
-
-            </div>
-
-          </div>
-        </div>
-
-
-        <div class="col-md-3 col-sm-6 mb-4">
-          <div class="card">
-            <div class="image">
-              <img src="icons/provider.png"
-                alt="" class="card-img">
-            </div>
-
-            <div class="card-body">
-              <a href="https://github.com/ianshulx/Django-Projects-for-beginners/tree/main/django%20banking%20app"
-                target="_blank" class="btn"><i class="bi bi-github"></i></a>
-              <h6 class="card-title">
-                <a href="http://github.com/ianshulx/Django-Projects-for-beginners/tree/main/django%20banking%20app"
-                  target="_blank">
-                  Django Banking App
-                </a>
-
-              </h6>
-
-
-            </div>
-
-          </div>
-        </div>
-
-
-        <div class="col-md-3 col-sm-6 mb-4">
-          <div class="card">
-            <div class="image">
-              <img src="icons/newspaper.png"
-                alt="" class="card-img">
-            </div>
-
-            <div class="card-body">
-              <a href="https://github.com/ianshulx/Django-Projects-for-beginners/tree/main/django%20news%20app"
-                target="_blank" class="btn"><i class="bi bi-github"></i></a>
-
-              <h6 class="card-title">
-                <a href="http://github.com/ianshulx/Django-Projects-for-beginners/tree/main/django%20news%20app"
-                  target="_blank">
-                  Django News App
-                </a>
-
-              </h6>
-
-            </div>
-
-          </div>
-        </div>
-
-        <div class="col-md-3 col-sm-6 mb-4">
-          <div class="card ">
-            <div class="image">
-              <img src="icons/polling.png"
-                alt="" class="card-img">
-            </div>
-
-            <div class="card-body">
-              <a href="https://github.com/ianshulx/Django-Projects-for-beginners/tree/main/Django-Poll-App"
-                target="_blank" class="btn"><i class="bi bi-github"></i></a>
-              <h6 class="card-title">
-                <a href="http://github.com/ianshulx/Django-Projects-for-beginners/tree/main/Django-Poll-App"
-                  target="_blank">
-                  Django Poll app
-                </a>
-
-              </h6>
-
-            </div>
-
-          </div>
-        </div>
-
-
-        <div class="col-md-3 col-sm-6 mb-4">
-          <div class="card">
-            <div class="image">
-              <img src="icons/wordpress.png"
-                alt="" class="card-img">
-            </div>
-
-            <div class="card-body">
-              <a href="https://github.com/yourusername/django-blog-app" target="_blank" class="btn"><i
-                  class="bi bi-github"></i></a>
-              <h6 class="card-title">
-                <a href="https://github.com/yourusername/django-blog-app" target="_blank">
-                  Django Blog App
-                </a>
-
-              </h6>
-
-
-            </div>
-
-          </div>
-        </div>
-
-
-        <div class="col-md-3 col-sm-6 mb-4">
-          <div class="card">
-            <div class="image">
-              <img src="icons/calendar.png"
-                alt="" class="card-img">
-            </div>
-
-            <div class="card-body">
-              <a href="https://github.com/ianshulx/Django-Projects-for-beginners/tree/main/django-todo" target="_blank"
-                class="btn"><i class="bi bi-github"></i></a>
-              <h6 class="card-title">
-                <a href="https://github.com/ianshulx/Django-Projects-for-beginners/tree/main/django-todo"
-                  target="_blank">
-                  Django Todo
-                </a>
-
-              </h6>
-
-
-            </div>
-
-          </div>
-        </div>
-
-
-        <div class="col-md-3 col-sm-6 mb-4">
-          <div class="card">
-            <div class="image">
-              <img src="icons/letter.png"
-                alt="" class="card-img">
-            </div>
-
-            <div class="card-body">
-              <a href="https://github.com/ianshulx/Django-Projects-for-beginners/tree/main/email_project"
-                target="_blank" class="btn"><i class="bi bi-github"></i></a>
-              <h6 class="card-title">
-                <a href="https://github.com/ianshulx/Django-Projects-for-beginners/tree/main/email_project"
-                  target="_blank">
-                  Email Project
-                </a>
-
-              </h6>
-
-
-            </div>
-
-          </div>
-        </div>
-
-
-        <div class="col-md-3 col-sm-6 mb-4">
-          <div class="card">
-            <div class="image">
-              <img src="icons/library.png"
-                alt="" class="card-img">
-            </div>
-
-
-            <div class="card-body">
-              <a href="https://github.com/ianshulx/Django-Projects-for-beginners/tree/main/facebook_clone"
-                target="_blank" class="btn"><i class="bi bi-github"></i></a>
-              <h6 class="card-title">
-                <a href="https://github.com/ianshulx/Django-Projects-for-beginners/tree/main/facebook_clone"
-                  target="_blank">
-                  Library Management System
-                </a>
-
-              </h6>
-
-
-            </div>
-
-          </div>
-        </div>
-
-
-        <div class="col-md-3 col-sm-6 mb-4">
-          <div class="card">
-            <div class="image">
-              <img src="icons/facebook.png"
-                alt="" class="card-img">
-            </div>
-
-            <div class="card-body">
-              <a href="https://github.com/ianshulx/Django-Projects-for-beginners/tree/main/library-management-system-master"
-                target="_blank" class="btn"><i class="bi bi-github"></i></a>
-              <h6 class="card-title">
-                <a href="https://github.com/ianshulx/Django-Projects-for-beginners/tree/main/library-management-system-master"
-                  target="_blank">
-                  Facebook Clone App
-                </a>
-
-              </h6>
-
-
-            </div>
-
-          </div>
-        </div>
-
+  <!-- Project Section -->
+  <section id="projects">
+    <div class="container-fluid mt-5">
+      <div class="row">
+        <!-- <h2>Projects List</h2> -->
+          
+<div id="projects-search"
+     style="
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 8px;
+        margin-bottom: 0px;
+        padding-right: 130px;
+     ">
+  <input id="project-search-input"
+         type="search"
+         placeholder="Search projects..."
+         aria-label="Search projects"
+         style="
+            width: 260px;
+            padding: 8px 12px;
+            font-size: 14px;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.3);
+            background: rgba(255,255,255,0.15);
+            color: #fff;
+            outline: none;
+         " />
+  <button id="project-clear-btn"
+          style="
+             padding: 8px 14px;
+             font-size: 14px;
+             border-radius: 8px;
+             border: none;
+             background: rgba(255,255,255,0.2);
+             color: #fff;
+             cursor: pointer;
+             transition: background 0.2s;
+          "
+          onmouseover="this.style.background='rgba(255,255,255,0.3)'"
+          onmouseout="this.style.background='rgba(255,255,255,0.2)'">
+    Clear
+  </button>
+</div>
+
+
+        
+        <div id="projects-container" class="mt-4"></div>
       </div>
-
-
-      <!-- Add more projects as needed -->
-
-      <!-- </ul> -->
     </div>
-
-
-
-
   </section>
 
-  <section class="text-center">
-    <section class="text-center" style="padding: 20px;">
-      <h1 class="hero-text">Our Contributors</h1>
-      <div class="" id="contributors-box">
-        <ul id="contributors-list">
-          <!-- Contributors will be displayed here -->
-        </ul>
-      </div>
-    </section>
+  <section id="contributors" class="" style="padding: 20px">
+    <h1 class="hero-text ms-5">Our Contributors</h1>
+    <div id="contributors-box">
+      <ul id="contributors-list">
+        <!-- Contributors will be displayed here -->
+      </ul>
+    </div>
   </section>
 
   <!-- Footer -->
 
   <footer class="bg-dark text-light text-center py-3">
     <div class="container">
-      <p>&copy; 2023 <a href="https://hacktoberfest.com/">HacktoberFest</a></p>
-      <a href="https://github.com/ianshulx" class="text-light" target="_blank">
-        <i class="bi bi-github"></i> GitHub
+      <a href="https://github.com/ianshulx" target="_blank"><i class="bi bi-github"></i></a>
+      &nbsp;
+      <a href="https://www.linkedin.com/in/ianshulx/" target="_blank"> <i class="bi bi-linkedin"></i></a>
+      &nbsp;
+      <a href="https://www.instagram.com/hackers.core/?hl=en" target="_blank"> <i class="bi bi-instagram"></i></a>
+
+      <br>
+      This repository is licensed under the MIT license. See the
+      <a href="https://github.com/ianshulx/django-projects-for-beginners/blob/main/LICENSE" target="_blank">LICENSE
       </a>
-      <p></p>
-      <p>This repository is licensed under the MIT license. See the <a
-          href="https://github.com/ianshulx/Django-Projects-for-beginners/blob/main/LICENSE">license.</a> file for more
-        information.</p>
+      file for more information.
+      </p>
     </div>
   </footer>
   <script>
     // Replace with your GitHub repository URL
-    const repoUrl = 'https://api.github.com/repos/ianshulx/Django-Projects-for-beginners/contributors';
+    const repoUrl =
+      "https://api.github.com/repos/ianshulx/Django-Projects-for-beginners";
 
     // Fetch contributors data from GitHub API
-    fetch(repoUrl)
-      .then(response => response.json())
-      .then(data => {
-        const contributorsList = document.getElementById('contributors-list');
+    fetch(`${repoUrl}/contributors`)
+      .then((response) => response.json())
+      .then((data) => {
+        const contributorsList = document.getElementById("contributors-list");
 
         // Loop through the contributors and create list items
-        data.forEach(contributor => {
-          const listItem = document.createElement('li');
+        data.forEach((contributor) => {
+          const listItem = document.createElement("li");
           listItem.innerHTML = `
-                        <a href="${contributor.html_url}" target="_blank">
-                            <img src="${contributor.avatar_url}" alt="${contributor.login}" width="100" height="100">
-                            <p>${contributor.login}</p>
-                        </a>
-                    `;
+                  <a href="${contributor.html_url}" target="_blank">
+                      <img src="${contributor.avatar_url}" alt="${contributor.login}" width="100" height="100">
+                      <p>${contributor.login}</p>
+                  </a>
+              `;
           contributorsList.appendChild(listItem);
         });
+
+        // Update contributors count in menu button
+        const contributorsBtn = document.querySelector('.contributors-btn');
+        if (contributorsBtn) {
+          contributorsBtn.innerHTML = `<i class="bi bi-people-fill"></i> Contributors (${data.length})`;
+        }
       })
-      .catch(error => {
-        console.error('Error fetching data:', error);
+      .catch((error) => {
+        console.error("Error fetching data:", error);
       });
+
+    // Fetch repo details for stars, forks, watchers, etc.
+    fetch(repoUrl)
+      .then((response) => response.json())
+      .then((repoData) => {
+        // Update stars count
+        const starBtn = document.querySelector('.star-btn');
+        if (starBtn) {
+          starBtn.innerHTML = `<i class="bi bi-star-fill"></i> Star (${repoData.stargazers_count})`;
+        }
+        // Update forks count
+        const forkBtn = document.querySelector('.fork-btn');
+        if (forkBtn) {
+          forkBtn.innerHTML = `<i class="bi bi-code-branch"></i> Fork (${repoData.forks_count})`;
+        }
+        // Fetch open PRs count
+        fetch(`${repoUrl}/pulls?state=open`)
+          .then((response) => response.json())
+          .then((pullsData) => {
+            const prCount = pullsData.length;
+            const issuesCount = repoData.open_issues_count - prCount;
+            const watchersCount = repoData.subscribers_count;
+            // Fix NaN and undefined counts by validating values
+            const safeIssuesCount = Number.isInteger(issuesCount) && issuesCount >= 0 ? issuesCount : 0;
+            const safePrCount = Number.isInteger(prCount) && prCount >= 0 ? prCount : 0;
+            const safeWatchersCount = Number.isInteger(watchersCount) && watchersCount >= 0 ? watchersCount : 0;
+            // Update issues
+            const issuesBtn = document.querySelector('.issues-btn');
+            if (issuesBtn) {
+              issuesBtn.innerHTML = `<i class="bi bi-exclamation-circle-fill"></i> Issues (${safeIssuesCount})`;
+            }
+            // Update PRs
+            const prBtn = document.querySelector('.pr-btn');
+            if (prBtn) {
+              prBtn.innerHTML = `<i class="bi bi-git-pull-request"></i> Pull Requests (${safePrCount})`;
+            }
+            // Update Watchers
+            const watchersBtn = document.querySelector('.watchers-btn');
+            if (watchersBtn) {
+              watchersBtn.innerHTML = `<i class="bi bi-eye"></i> Watchers (${safeWatchersCount})`;
+            }
+          })
+          .catch((error) => {
+            console.error("Error fetching pulls:", error);
+          });
+      })
+      .catch((error) => {
+        console.error("Error fetching repo data:", error);
+      });
+
+    // Navbar scroll effect
+    const navbar = document.querySelector('.floating-navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 10) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+
+    // Fade logo on scroll
+    const logoDiv = document.getElementById('logo-div');
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      if (scrollY > 50) {
+        logoDiv.style.opacity = '0';
+      } else {
+        logoDiv.style.opacity = '1';
+      }
+    });
   </script>
+  <script src="projects.js"></script>
+  <script src="C:\Users\Priya Karn\django-projects-for-beginners\Data.js"></script>
+
+
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
     crossorigin="anonymous"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+    width="100%" height="100%" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice">
+    <defs>
+      <linearGradient id="bg">
+        <stop offset="0%" style="stop-color:rgba(130, 158, 249, 0.06)"></stop>
+        <stop offset="50%" style="stop-color:rgba(71, 248, 127, 0.812)"></stop>
+        <stop offset="100%" style="stop-color:rgba(115, 209, 72, 0.2)"></stop>
+      </linearGradient>
+      <path id="wave" fill="url(#bg)" d="M-363.852,502.589c0,0,236.988-41.997,505.475,0
+	s371.981,38.998,575.971,0s293.985-39.278,505.474,5.859s493.475,48.368,716.963-4.995v560.106H-363.852V502.589z" />
+    </defs>
+    <g>
+      <use xlink:href='#wave' opacity=".3">
+        <animateTransform attributeName="transform" attributeType="XML" type="translate" dur="10s" calcMode="spline"
+          values="270 230; -334 180; 270 230" keyTimes="0; .5; 1" keySplines="0.42, 0, 0.58, 1.0;0.42, 0, 0.58, 1.0"
+          repeatCount="indefinite" />
+      </use>
+      <use xlink:href='#wave' opacity=".6">
+        <animateTransform attributeName="transform" attributeType="XML" type="translate" dur="8s" calcMode="spline"
+          values="-270 230;243 220;-270 230" keyTimes="0; .6; 1" keySplines="0.42, 0, 0.58, 1.0;0.42, 0, 0.58, 1.0"
+          repeatCount="indefinite" />
+      </use>
+      <use xlink:href='#wave' opacty=".9">
+        <animateTransform attributeName="transform" attributeType="XML" type="translate" dur="6s" calcMode="spline"
+          values="0 230;-140 200;0 230" keyTimes="0; .4; 1" keySplines="0.42, 0, 0.58, 1.0;0.42, 0, 0.58, 1.0"
+          repeatCount="indefinite" />
+      </use>
+    </g>
+  </svg>
 </body>
+<script src="./menu-toggle.js"></script>
 
 </html>
