@@ -1,250 +1,262 @@
 // Please add your project details in the below array.
 const projects = [
   {
-    title: "Django + PayPal Online Payment",
-    url: "https://github.com/ianshulx/Django-PayPal-Online-Payment",
-    description: "A Django application integrated with PayPal to handle online payments securely and efficiently.",
-    imgSrc: "assets/django_payment.jpeg"
-  },
-  {
     title: "Django Web Crawler",
-    url: "https://github.com/ianshulx/Django-Web-Crawler",
-    description: "A web crawler built with Django to scrape data from websites and store it in an organized manner.",
-    imgSrc: "assets/django_crawler.jpeg"
+    url: "https://github.com/ianshulx/Django-Projects-for-beginners/tree/main-616/Django%20Web%20Crawler",
+    description: "A Django-based web crawler to scrape and index website content efficiently.",
+    imgSrc: "assets/django_web_crawler.jpeg"
   },
   {
     title: "Django-Chatbot",
-    url: "https://github.com/ianshulx/Django-Chatbot",
-    description: "A chatbot application built in Django that can interact with users and provide automated responses.",
+    url: "https://github.com/ianshulx/Django-Projects-for-beginners/tree/main-616/Django-Chatbot",
+    description: "An AI-powered chatbot built using Django and NLP integration.",
     imgSrc: "assets/django_chatbot.jpeg"
   },
   {
     title: "Django-Poll-App",
-    url: "https://github.com/ianshulx/Django-Poll-App",
-    description: "A Django-based polling application to create, vote, and manage polls in a simple web interface.",
-    imgSrc: "assets/django_poll.jpeg"
+    url: "https://github.com/ianshulx/Django-Projects-for-beginners/tree/main-616/Django-Poll-App",
+    description: "A classic Django polling app for voting and result display.",
+    imgSrc: "assets/django_poll_app.jpeg"
   },
   {
     title: "Django-socialmedia-app",
-    url: "https://github.com/ianshulx/Django-socialmedia-app",
-    description: "A social media platform built with Django, featuring user profiles, posts, and interactions.",
-    imgSrc: "assets/django_social.jpeg"
+    url: "https://github.com/ianshulx/Django-Projects-for-beginners/tree/main-616/Django-socialmedia-app",
+    description: "A social media platform with posts, likes, and user profiles.",
+    imgSrc: "assets/django_socialmedia_app.jpeg"
   },
   {
     title: "Django_5_PDF_Certificate_Generator",
-    url: "https://github.com/ianshulx/Django_5_PDF_Certificate_Generator",
-    description: "Automatically generate PDF certificates for courses or events using Django.",
-    imgSrc: "assets/django_certificate.jpeg"
-  },
-  {
-    title: "Ecommerce_Project",
-    url: "https://github.com/ianshulx/Ecommerce_Project",
-    description: "A fully functional e-commerce site built in Django with user registration, product catalog, and shopping cart.",
-    imgSrc: "assets/django_ecommerce.jpeg"
+    url: "https://github.com/ianshulx/Django-Projects-for-beginners/tree/main-616/Django_5_PDF_Certificate_Generator",
+    description: "Generates professional certificates in PDF format dynamically using Django.",
+    imgSrc: "assets/django_pdf_certificate_generator.jpeg"
   },
   {
     title: "FinanceTracker",
-    url: "https://github.com/ianshulx/FinanceTracker",
-    description: "A Django app to track personal finances, manage budgets, and analyze spending patterns.",
-    imgSrc: "assets/django_finance.jpeg"
+    url: "https://github.com/ianshulx/Django-Projects-for-beginners/tree/main-616/FinanceTracker",
+    description: "A finance tracker to monitor income, expenses, and savings trends.",
+    imgSrc: "assets/finance_tracker.jpeg"
   },
   {
     title: "HostelAllocation",
-    url: "https://github.com/ianshulx/HostelAllocation",
-    description: "Manage hostel room allocation efficiently with this Django application for universities or organizations.",
-    imgSrc: "assets/django_hostel.jpeg"
+    url: "https://github.com/ianshulx/Django-Projects-for-beginners/tree/main-616/HostelAllocation",
+    description: "A hostel room allocation system with student and room management.",
+    imgSrc: "assets/hostel_allocation.jpeg"
   },
   {
     title: "ImageEditor_Django",
-    url: "https://github.com/ianshulx/ImageEditor_Django",
-    description: "A Django-based image editor to apply filters, crop, and edit images directly in the browser.",
-    imgSrc: "assets/django_image_editor.jpeg"
+    url: "https://github.com/ianshulx/Django-Projects-for-beginners/tree/main-616/ImageEditor_Django",
+    description: "An online image editor using Django and Pillow library.",
+    imgSrc: "assets/image_editor_django.jpeg"
   },
   {
     title: "Movie_News",
-    url: "https://github.com/ianshulx/Movie_News",
-    description: "A Django project to display the latest movie news and reviews in a blog-style layout.",
-    imgSrc: "assets/django_movie_news.jpeg"
+    url: "https://github.com/ianshulx/Django-Projects-for-beginners/tree/main-616/Movie_News",
+    description: "A movie news blog app displaying the latest updates from the film industry.",
+    imgSrc: "assets/movie_news.jpeg"
   },
   {
     title: "Movie_Project",
-    url: "https://github.com/ianshulx/Movie_Project",
-    description: "A Django application to manage movie listings, reviews, and ratings for cinema enthusiasts.",
-    imgSrc: "assets/django_movie.jpeg"
+    url: "https://github.com/ianshulx/Django-Projects-for-beginners/tree/main-616/Movie_Project",
+    description: "A Django movie database app for managing films, actors, and reviews.",
+    imgSrc: "assets/movie_project.jpeg"
   },
   {
     title: "Pdf-Editor-Django",
-    url: "https://github.com/ianshulx/Pdf-Editor-Django",
-    description: "Edit, merge, and split PDF files directly from your Django web application.",
-    imgSrc: "assets/django_pdf_editor.jpeg"
+    url: "https://github.com/ianshulx/Django-Projects-for-beginners/tree/main-616/Pdf-Editor-Django",
+    description: "A Django web app to merge, split, and edit PDF files.",
+    imgSrc: "assets/pdf_editor_django.jpeg"
   },
   {
     title: "Recipe-Book-App",
-    url: "https://github.com/ianshulx/Recipe-Book-App",
-    description: "A Django application to browse, create, and manage recipes with a retro 90s design theme.",
-    imgSrc: "assets/django_recipe.jpeg"
-  },
-  {
-    title: "Search_Engine_for_Wikipedia",
-    url: "https://github.com/ianshulx/Search_Engine_for_Wikipedia",
-    description: "Search Wikipedia articles efficiently with this Django-powered search engine interface.",
-    imgSrc: "assets/django_wiki.jpeg"
-  },
-  {
-    title: "Student management system",
-    url: "https://github.com/ianshulx/Student-management-system",
-    description: "A complete Django application to manage student records, grades, and attendance.",
-    imgSrc: "assets/django_student.jpeg"
+    url: "https://github.com/ianshulx/Django-Projects-for-beginners/tree/main-616/Recipe-Book-App",
+    description: "A retro-themed recipe book app to add and share food recipes.",
+    imgSrc: "assets/recipe_book_app.jpeg"
   },
   {
     title: "To-Do_app",
-    url: "https://github.com/ianshulx/To-Do_app",
-    description: "A Django-based To-Do app to manage daily tasks with CRUD functionality.",
-    imgSrc: "assets/django_todo.jpeg"
+    url: "https://github.com/ianshulx/Django-Projects-for-beginners/tree/main-616/To-Do_app",
+    description: "A simple To-Do application to manage daily tasks.",
+    imgSrc: "assets/todo_app.jpeg"
   },
   {
     title: "URL Shortener",
-    url: "https://github.com/ianshulx/URL-Shortener",
-    description: "A Django web app to shorten URLs and track click statistics for convenience and analytics.",
-    imgSrc: "assets/django_url.jpeg"
+    url: "https://github.com/ianshulx/Django-Projects-for-beginners/tree/main-616/URL%20Shortener",
+    description: "A Django-based URL shortener with analytics and custom aliases.",
+    imgSrc: "assets/url_shortener.jpeg"
   },
   {
     title: "User Authentication system",
-    url: "https://github.com/ianshulx/User-Authentication-system",
-    description: "Django-based user authentication system with signup, login, password reset, and profile management.",
-    imgSrc: "assets/django_auth.jpeg"
+    url: "https://github.com/ianshulx/Django-Projects-for-beginners/tree/main-616/User%20Authentication%20system",
+    description: "Handles user registration, login, and secure authentication.",
+    imgSrc: "assets/user_authentication_system.jpeg"
   },
   {
     title: "Weather-Application-Django",
-    url: "https://github.com/ianshulx/Weather-Application-Django",
-    description: "Check real-time weather information with this Django web application using API integration.",
-    imgSrc: "assets/django_weather.jpeg"
+    url: "https://github.com/ianshulx/Django-Projects-for-beginners/tree/main-616/Weather-Application-Django",
+    description: "Displays live weather updates using a Django weather API integration.",
+    imgSrc: "assets/weather_application_django.jpeg"
   },
   {
     title: "django Quiz Form/myproject",
-    url: "https://github.com/ianshulx/django-Quiz-Form",
-    description: "A Django project for creating and managing quizzes with automatic scoring.",
-    imgSrc: "assets/django_quiz.jpeg"
+    url: "https://github.com/ianshulx/Django-Projects-for-beginners/tree/main-616/django%20Quiz%20Form/myproject",
+    description: "An interactive Django quiz app with form validation.",
+    imgSrc: "assets/django_quiz_form.jpeg"
   },
   {
     title: "django banking app",
-    url: "https://github.com/ianshulx/django-banking-app",
-    description: "Simulate banking operations like deposit, withdrawal, and account management using Django.",
-    imgSrc: "assets/django_banking.jpeg"
+    url: "https://github.com/ianshulx/Django-Projects-for-beginners/tree/main-616/django%20banking%20app",
+    description: "A basic banking system managing accounts and transactions.",
+    imgSrc: "assets/django_banking_app.jpeg"
   },
   {
     title: "django news app",
-    url: "https://github.com/ianshulx/django-news-app",
-    description: "A news aggregator Django app to fetch, categorize, and display the latest news articles.",
-    imgSrc: "assets/django_news.jpeg"
+    url: "https://github.com/ianshulx/Django-Projects-for-beginners/tree/main-616/django%20news%20app",
+    description: "A Django app fetching and displaying live news updates.",
+    imgSrc: "assets/django_news_app.jpeg"
   },
   {
     title: "django-blog app",
-    url: "https://github.com/ianshulx/django-blog-app",
-    description: "A simple blogging platform built with Django for creating and sharing posts easily.",
-    imgSrc: "assets/django_blog.jpeg"
+    url: "https://github.com/ianshulx/Django-Projects-for-beginners/tree/main-616/django-blog%20app",
+    description: "A blogging platform built with Django framework.",
+    imgSrc: "assets/django_blog_app.jpeg"
   },
   {
     title: "django-chat-application",
-    url: "https://github.com/ianshulx/django-chat-application",
-    description: "A real-time chat application built with Django Channels and WebSockets for instant messaging.",
-    imgSrc: "assets/django_chatapp.jpeg"
+    url: "https://github.com/ianshulx/Django-Projects-for-beginners/tree/main-616/django-chat-application",
+    description: "A real-time chat application using Django Channels.",
+    imgSrc: "assets/django_chat_application.jpeg"
   },
   {
     title: "django-leetcode-extension",
-    url: "https://github.com/ianshulx/django-leetcode-extension",
-    description: "A beginner-friendly Django extension to practice LeetCode problems directly from the app.",
-    imgSrc: "assets/django_leetcode.jpeg"
+    url: "https://github.com/ianshulx/Django-Projects-for-beginners/tree/main-616/django-leetcode-extension",
+    description: "A Django project designed to help practice LeetCode problems.",
+    imgSrc: "assets/django_leetcode_extension.jpeg"
   },
   {
     title: "django-todo-app",
-    url: "https://github.com/ianshulx/django-todo-app",
-    description: "A complete Django To-Do application with task management, deadlines, and priority tagging.",
-    imgSrc: "assets/django_todo_full.jpeg"
+    url: "https://github.com/ianshulx/Django-Projects-for-beginners/tree/main-616/django-todo-app",
+    description: "An enhanced Django To-Do app with CRUD operations.",
+    imgSrc: "assets/django_todo_app.jpeg"
   },
   {
     title: "django-todo",
-    url: "https://github.com/ianshulx/django-todo",
-    description: "Another version of a Django To-Do app with a simple interface and easy task tracking.",
-    imgSrc: "assets/django_todo_simple.jpeg"
+    url: "https://github.com/ianshulx/Django-Projects-for-beginners/tree/main-616/django-todo",
+    description: "A lightweight Django To-Do project for beginners.",
+    imgSrc: "assets/django_todo.jpeg"
   },
   {
     title: "django_csv_import",
-    url: "https://github.com/ianshulx/django_csv_import",
-    description: "Import CSV files and process data efficiently within your Django application.",
-    imgSrc: "assets/django_csv.jpeg"
+    url: "https://github.com/ianshulx/Django-Projects-for-beginners/tree/main-616/django_csv_import",
+    description: "A tool to import and manage CSV data through Django admin.",
+    imgSrc: "assets/django_csv_import.jpeg"
   },
   {
     title: "django_url_shortner",
-    url: "https://github.com/ianshulx/django_url_shortner",
-    description: "A Django project to shorten URLs and provide analytics on link clicks.",
-    imgSrc: "assets/django_url_short.jpeg"
+    url: "https://github.com/ianshulx/Django-Projects-for-beginners/tree/main-616/django_url_shortner",
+    description: "Shorten long URLs with analytics tracking using Django.",
+    imgSrc: "assets/django_url_shortner.jpeg"
   },
   {
     title: "eHOSPITAL",
-    url: "https://github.com/ianshulx/eHOSPITAL",
-    description: "Electronic Hospital management system built with Django to track patients, doctors, and appointments.",
-    imgSrc: "assets/django_hospital.jpeg"
+    url: "https://github.com/ianshulx/Django-Projects-for-beginners/tree/main-616/eHOSPITAL",
+    description: "A hospital management system built using Django.",
+    imgSrc: "assets/ehospital.jpeg"
   },
   {
     title: "email-sender",
-    url: "https://github.com/ianshulx/email-sender",
-    description: "Send automated emails from your Django app with customizable templates.",
-    imgSrc: "assets/django_email.jpeg"
+    url: "https://github.com/ianshulx/Django-Projects-for-beginners/tree/main-616/email-sender",
+    description: "A Django app to send emails with attachments via SMTP.",
+    imgSrc: "assets/email_sender.jpeg"
   },
   {
     title: "email_project",
-    url: "https://github.com/ianshulx/email_project",
-    description: "Another Django-based project for sending emails and notifications automatically.",
-    imgSrc: "assets/django_email_project.jpeg"
+    url: "https://github.com/ianshulx/Django-Projects-for-beginners/tree/main-616/email_project",
+    description: "Handles bulk and automated email dispatch using Django.",
+    imgSrc: "assets/email_project.jpeg"
+  },
+  {
+    title: "event_manager",
+    url: "https://github.com/ianshulx/Django-Projects-for-beginners/tree/main-616/event_manager",
+    description: "Manage and track events, participants, and registrations.",
+    imgSrc: "assets/event_manager.jpeg"
+  },
+  {
+    title: "fitness-tracker",
+    url: "https://github.com/ianshulx/Django-Projects-for-beginners/tree/main-616/fitness-tracker",
+    description: "A Django fitness tracker for monitoring workouts and goals.",
+    imgSrc: "assets/fitness_tracker.jpeg"
   },
   {
     title: "habit_tracker_project",
-    url: "https://github.com/ianshulx/habit_tracker_project",
-    description: "Track daily habits and goals using this Django application with reminders and statistics.",
-    imgSrc: "assets/django_habit.jpeg"
+    url: "https://github.com/ianshulx/Django-Projects-for-beginners/tree/main-616/habit_tracker_project",
+    description: "Track habits and visualize daily progress using Django.",
+    imgSrc: "assets/habit_tracker_project.jpeg"
   },
   {
     title: "invoice_generator",
-    url: "https://github.com/ianshulx/invoice_generator",
-    description: "Generate professional invoices automatically with Django, ready for download and print.",
-    imgSrc: "assets/django_invoice.jpeg"
+    url: "https://github.com/ianshulx/Django-Projects-for-beginners/tree/main-616/invoice_generator",
+    description: "Generates client invoices automatically using Django templates.",
+    imgSrc: "assets/invoice_generator.jpeg"
+  },
+  {
+    title: "Django + PayPal Online Payment",
+    url: "https://github.com/ianshulx/Django-Projects-for-beginners/tree/main-616/Django%20Intermediate%20Projects/Django%20%2B%20PayPal%20Online%20Payment",
+    description: "An intermediate Django project integrating PayPal for secure online transactions and order management.",
+    imgSrc: "assets/django_paypal_project.jpeg"
+  },
+  {
+    title: "Ecommerce_Project",
+    url: "https://github.com/ianshulx/Django-Projects-for-beginners/tree/main-616/Django%20Intermediate%20Projects/Ecommerce_Project",
+    description: "A Django-based ecommerce site with user authentication, cart system, and dynamic product management.",
+    imgSrc: "assets/django_ecommerce_project.jpeg"
+  },
+  {
+    title: "Search_Engine_for_Wikipedia",
+    url: "https://github.com/ianshulx/Django-Projects-for-beginners/tree/main-616/Django%20Intermediate%20Projects/Search_Engine_for_Wikipedia",
+    description: "A Django-powered search engine that fetches live data from Wikipedia using APIs and displays results neatly.",
+    imgSrc: "assets/django_wikipedia_search.jpeg"
+  },
+  {
+    title: "Student Management System",
+    url: "https://github.com/ianshulx/Django-Projects-for-beginners/tree/main-616/Django%20Intermediate%20Projects/Student%20management%20system",
+    description: "A complete student data management system with teacher panel, student registration, and grading modules.",
+    imgSrc: "assets/django_student_management.jpeg"
+  },
+  {
+    title: "Uber_Clone",
+    url: "https://github.com/ianshulx/Django-Projects-for-beginners/tree/main-616/Django%20Intermediate%20Projects/Uber_Clone",
+    description: "An Uber-like ride booking platform with driver tracking, fare calculation, and trip history using Django.",
+    imgSrc: "assets/django_uber_clone.jpeg"
+  },
+  {
+    title: "facebook_clone",
+    url: "https://github.com/ianshulx/Django-Projects-for-beginners/tree/main-616/Django%20Intermediate%20Projects/facebook_clone",
+    description: "A Facebook-style social platform built with Django featuring posts, likes, comments, and friend system.",
+    imgSrc: "assets/django_facebook_clone.jpeg"
+  },
+  {
+    title: "instagram-clone-Django",
+    url: "https://github.com/ianshulx/Django-Projects-for-beginners/tree/main-616/Django%20Intermediate%20Projects/instagram-clone-Django",
+    description: "An Instagram-like app made using Django with image uploads, likes, user profiles, and feed display.",
+    imgSrc: "assets/django_instagram_clone.jpeg"
+  },
+  {
+    title: "inventory_management_system",
+    url: "https://github.com/ianshulx/Django-Projects-for-beginners/tree/main-616/Django%20Intermediate%20Projects/inventory_management_system",
+    description: "An inventory management tool that helps track products, stock, and sales efficiently using Django.",
+    imgSrc: "assets/django_inventory_management.jpeg"
   },
   {
     title: "library-management-system-master",
-    url: "https://github.com/ianshulx/library-management-system-master",
-    description: "Manage books, members, and borrowing with this complete Django library management system.",
-    imgSrc: "assets/django_library.jpeg"
+    url: "https://github.com/ianshulx/Django-Projects-for-beginners/tree/main-616/Django%20Intermediate%20Projects/library-management-system-master",
+    description: "A Django project to manage library records including books, members, issue/return logs, and fines.",
+    imgSrc: "assets/django_library_management.jpeg"
   },
   {
     title: "music-recommendation-system",
-    url: "https://github.com/ianshulx/music-recommendation-system",
-    description: "A Django app that suggests music to users based on preferences and listening history.",
-    imgSrc: "assets/django_music.jpeg"
-  },
-  {
-    title: "newspaper",
-    url: "https://github.com/ianshulx/newspaper",
-    description: "A Django-based newspaper app to publish news articles with categories and tags.",
-    imgSrc: "assets/django_newspaper.jpeg"
-  },
-  {
-    title: "rock_paper_scissors",
-    url: "https://github.com/ianshulx/rock_paper_scissors",
-    description: "Play the classic Rock-Paper-Scissors game online with this Django app.",
-    imgSrc: "assets/django_rps.jpeg"
-  },
-  {
-    title: "text_to_speech",
-    url: "https://github.com/ianshulx/text_to_speech",
-    description: "A Django-based text-to-speech project that converts written text into natural audio for accessibility or voice applications.",
-    imgSrc: "assets/django_text_speech.jpeg"
-  },
-  {
-    title: "todo_project",
-    url: "https://github.com/ianshulx/todo_project",
-    description: "A fully-featured Django To-Do project with task toggling, form management, and Bootstrap styling.",
-    imgSrc: "assets/django_todo_project.jpeg"
+    url: "https://github.com/ianshulx/Django-Projects-for-beginners/tree/main-616/Django%20Intermediate%20Projects/music-recommendation-system",
+    description: "A Django-based music recommendation system using machine learning to suggest tracks to users.",
+    imgSrc: "assets/django_music_recommendation.jpeg"
   }
 ];
 
