@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>BLACKBIT WEB ENCRYPTOR</title>
+    <meta name="description" content="Cyberpunk web-based file encryption and decryption using Python Flask + Fernet." />
+
+    <link rel="icon" type="image/svg+xml" href="/static/img/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600;700&family=VT323&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/static/css/styles.css" />
+  </head>
+  <body>
+    <!-- Three.js background -->
+    <canvas id="three-bg"></canvas>
+
+    <div class="container">
+      <header class="header">
+        <h1 id="bb-title" class="title">
+          <span class="accent">BLACKBIT</span> WEB ENCRYPTOR
+        </h1>
+        <div id="typed-subtitle" class="subtitle"></div>
+      </header>
+
+      <nav class="tabs">
+        <button id="tab-encrypt" class="tab active">Encrypt</button>
+        <button id="tab-decrypt" class="tab">Decrypt</button>
+      </nav>
+
+      <main class="panels">
+        <!-- Encrypt Panel -->
+        <section id="panel-encrypt" class="panel active">
+          <div class="panel-grid">
+            <div class="io">
+              <div class="dropzone" id="enc-drop">
+                <input type="file" id="enc-file" class="file-input" />
+                <div class="drop-hint">
+                  <div class="drop-title">Drop file here</div>
+                  <div class="drop-sub">or click to choose</div>
+                </div>
+              </div>
+              <button id="btn-encrypt" class="btn btn-primary">
+                <span class="spinner" aria-hidden="true"></span>
+                Encrypt File
+              </button>
+            </div>
+
+            <div class="results" id="enc-results" hidden>
+              <h3 class="section-title">Encryption Complete</h3>
+              <div class="stats" id="enc-stats"></div>
+              <div class="downloads">
+                <a id="dl-encrypted" class="btn btn-accent" href="#" download>
+                  Download Encrypted File
+                </a>
+                <a id="dl-key" class="btn btn-accent" href="#" download>
+                  Download Key (.key)
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Decrypt Panel -->
+        <section id="panel-decrypt" class="panel">
+          <div class="panel-grid">
+            <div class="io">
+              <div class="two-inputs">
+                <div class="dropzone" id="dec-drop-encrypted">
+                  <input type="file" id="dec-file-encrypted" class="file-input" />
+                  <div class="drop-hint">
+                    <div class="drop-title">Encrypted file (.encrypted)</div>
+                    <div class="drop-sub">drop or click</div>
+                  </div>
+                </div>
+                <div class="dropzone" id="dec-drop-key">
+                  <input type="file" id="dec-file-key" class="file-input" />
+                  <div class="drop-hint">
+                    <div class="drop-title">Key file (.key)</div>
+                    <div class="drop-sub">drop or click</div>
+                  </div>
+                </div>
+              </div>
+              <button id="btn-decrypt" class="btn btn-primary">
+                <span class="spinner" aria-hidden="true"></span>
+                Decrypt File
+              </button>
+            </div>
+
+            <div class="results" id="dec-results" hidden>
+              <h3 class="section-title">Decryption Complete</h3>
+              <div class="stats" id="dec-stats"></div>
+              <div class="downloads">
+                <a id="dl-decrypted" class="btn btn-accent" href="#" download>
+                  Download Restored File
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <!-- Terminal / System Console -->
+      <section class="terminal" id="terminal">
+        <div class="terminal-header">SYSTEM CONSOLE</div>
+        <div class="terminal-body" id="terminal-body">
+          <!-- Logs appended here -->
+          <div class="cursor" id="cursor">▌</div>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <span>⚡ Blackbit v2.0</span>
+      </footer>
+    </div>
+
+    <!-- Typed.js and Three.js from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.1.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+
+    <script src="/static/js/main.js"></script>
+  </body>
+</html>
