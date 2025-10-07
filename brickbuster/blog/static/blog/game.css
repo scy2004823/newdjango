@@ -1,0 +1,161 @@
+.main{
+  margin: 0 auto;
+  margin-top: 30px;
+}
+.game{
+  /* border: 1px solid red; */
+  padding: 15px;
+  display: flex;
+  justify-content: center;
+}
+.score-and-info{
+  margin-left: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.game-info{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.set-difficulty{
+  margin-top: 30px;
+  height: 30px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.set-difficulty button{
+  width: 100%;
+}
+button{
+  font-family: pixelated;
+  color: white;
+  background-color: black;
+  transition-duration: 1s;
+  height: 30px;
+}
+button:focus{
+  outline: none;
+}
+
+@keyframes opacityOnAndOff {
+    0% {
+        opacity: 0;
+    }
+    25%{
+      opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+.game-over{
+  opacity: 0;
+  text-align: center;
+  width: 179.5px;
+  position: absolute;
+  left: -299px;
+  background-color: black;
+  font-size: 18px;
+  line-height: 29.5px;
+  height: 29.5px;
+  z-index: 2;
+  transition-duration: 1s;
+}
+.score-saved{
+  opacity: 0;
+  text-align: center;
+  width: 179.5px;
+  position: absolute;
+  left: -299px;
+  background-color: #01B6DA;
+  font-size: 18px;
+  line-height: 29.5px;
+  height: 29.5px;
+  z-index: 2;
+  transition-duration: 1s;
+  animation-delay: 1s;
+  animation-duration: 4s;
+}
+.table-dimmed{
+  opacity: 0.6;
+}
+.btn-dimmed{
+  color: #C9C9C9 !important;
+  background-color: #5A5A5A !important;
+}
+.set-difficulty #normal{
+  background-color: #26C485;
+}
+.set-difficulty #hard{
+  background-color: #FF934F;
+}
+.set-difficulty #insane{
+  background-color: #FF4242;
+}
+.game-control{
+  height: 50px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.game-control a{
+  width: 48%;
+}
+.game-control #button_reset{
+  width: 48%;
+}
+.game-control #button_start{
+  width: 48%;
+}
+
+.game-control button:active{
+  font-size: 16px;
+  transition-duration: 0.3s;
+}
+table{
+  transition-duration: 0.5s;
+  border-collapse: collapse;
+}
+.table-main{
+  background: linear-gradient(180deg, rgba(39,36,61,1) 0%, rgba(32,32,101,1) 38%, rgba(180,255,249,1) 100%);
+}
+.table-sub{
+  margin: 0 auto;
+  background: linear-gradient(180deg, #27243d 0%, #212063 100%);
+}
+td{
+  box-sizing: border-box;
+  height: 30px;
+  width: 30px;
+  border: 1px solid white;
+  margin-left: -1px;
+  margin-bottom: -15px;
+}
+
+.score span{
+  font-size: 18px;
+}
+.wine{
+  background-color: #700548 !important;
+}
+.sand{
+  background-color: #F7E6AA !important;
+}
+.green{
+  background-color: #43AA8B !important;
+}
+.blue{
+  background-color: #5863F8 !important;
+}
+.orange{
+  background-color: #CF5C36 !important;
+}
+.pink{
+  background-color: #CFA2E2 !important;
+}

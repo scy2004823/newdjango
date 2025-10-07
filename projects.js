@@ -234,7 +234,20 @@ const projects = [
     url: "https://github.com/ianshulx/Django-Projects-for-beginners/tree/main-616/Django%20Intermediate%20Projects/music-recommendation-system",
     description: "A Django-based music recommendation system using machine learning to suggest tracks to users.",
     imgSrc: "assets/music.png"
-  }
+  },
+    {
+    title: "Forum website",
+    url: "https://github.com/ianshulx/Django-Projects-for-beginners/tree/main-616/Django%20Intermediate%20Projects/django-DiscussionPlatform-App",
+    description: "A Django-based forum webisite where people can put their different opinions",
+    imgSrc: "assets/Forum.png"
+  },
+  {
+  title: "BrickBuster Game",
+  url: "https://github.com/ianshulx/Django-Projects-for-beginners/tree/main-616/brickbuster",
+  description: "A classic brick-breaking arcade game built with Django and JavaScript.",
+  imgSrc: "assets/brick.png"
+}
+
 ];
 
 

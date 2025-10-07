@@ -1,0 +1,18 @@
+@media (max-width: 800px){
+  .col-4{
+    display: none !important;
+  }
+  table{
+    max-width: 800px;
+    margin-top: 70px !important;
+  }
+  .col-2{
+    width: 40% !important;
+  }
+  .scoreboard{
+    min-width: auto;
+  }
+  .content{
+    height: auto !important;
+  }
+}
