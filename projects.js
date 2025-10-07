@@ -239,7 +239,7 @@ const projects = [
     title: "Forum website",
     url: "https://github.com/ianshulx/Django-Projects-for-beginners/tree/main-616/Django%20Intermediate%20Projects/django-DiscussionPlatform-App",
     description: "A Django-based forum webisite where people can put their different opinions",
-    imgSrc: "assets/Forum.png"
+    imgSrc: "assets/forum.png"
   },
   {
   title: "BrickBuster Game",
