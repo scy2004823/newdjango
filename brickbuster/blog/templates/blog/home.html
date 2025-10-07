@@ -1,0 +1,69 @@
+{% extends "blog/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block links %}
+  <link rel="stylesheet" href="{% static 'blog/game.css' %}">
+{% endblock %}
+{% block content %}
+<span class="game-over">game over!</span>
+<span class="score-saved">score saved!</span>
+<div id="game" class="main">
+  <div class="game">
+    <table class="table-main">
+      <tbody>
+        {% for i in '000000000000000000'|make_list %}
+          <tr>
+          {% for j in '01234567'|make_list %}
+            <td id="{{ forloop.parentloop.counter|add:'-1' }}_{{ j }}"></td>
+          {% endfor %}
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <div class="score-and-info">
+      <div class="game-info">
+        <table class="table-sub">
+          <tbody>
+            {% for i in '01234'|make_list %}
+              <tr>
+              {% for j in '12345'|make_list %}
+                <td id="sub{{ i }}_{{ j }}"></td>
+              {% endfor %}
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <div class="controls">
+          <div class="handling">
+            <button id="left" onclick='move_left()' class="btn-difficulty">Left</button>
+            <button id="rotate"  onclick='rotate()' class="btn-difficulty">Rotate</button>
+            <button id="right"  onclick='move_right()' class="btn-difficulty">Right</button>
+          </div>
+          <div class="set-difficulty">
+            <button id="normal" onclick='choose_difficulty("normal")' class="btn-difficulty">Normal</button>
+            <button id="hard"  onclick='choose_difficulty("hard")' class="btn-difficulty">Hard</button>
+            <button id="insane"  onclick='choose_difficulty("insane")' class="btn-difficulty">Insane</button>
+          </div>
+          <div class="game-control">
+            <button id="button_start" type="button"  onclick='game()' name="button">Start</button>
+            <button id="button_reset" type="button" onclick='reset()' name="button">Reset</button>
+          </div>
+          <form id="post_score_form" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <fieldset class="form-group">
+              <div class="score">
+                <span>Score: </span><span id="score">0</span>
+                <input style="display: none;" type="input" name="score" value="0" class="numberinput form-control" required="" id="id_score">
+                <button style="display: none;" id="save_score_btn" type="submit" name="button">save score</button>
+              </div>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+    </div>
+</div>
+</div>
+{% endblock content %}
+{% block scripts %}
+  <script src="{% static 'js/game.js' %}"></script>
+{% endblock scripts %}

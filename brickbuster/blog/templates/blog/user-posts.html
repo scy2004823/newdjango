@@ -1,0 +1,50 @@
+{% extends "blog/base.html" %}
+{% load static %}
+{% block content %}
+  <table class="scoreboard infinite-container">
+        <thead>
+          <tr style="background: #222222;">
+            <th class="rank" style="width: 10%; padding-left: 20px;">rank</th>
+            <!-- <th style="width: 10%">id</th> -->
+            <th style="width: 25%">player</th>
+            <th style="width: 30%;">score</th>
+            <th style="width: 35%;">date</th>
+          </tr>
+        </thead>
+    {% for post in posts %}
+        <tr class="infinite-item">
+            <th class="rank" >{{ page_obj.start_index|add:forloop.counter0 }}</th>
+            <!-- <th>{{ post.id }}</th> -->
+            <th><a class="mr-2" href="{% url 'user-posts' post.author.username %}">{{ post.author }}</a></th>
+            <th>{{ post.score }}</th>
+            <th><small class="text-muted">{{ post.date_posted|date:"H:i F d, Y" }}</small></th>
+        </tr>
+    {% endfor %}
+  </table>
+  {% if is_paginated %}
+    {% if page_obj.has_next %}
+      <a style="display: none;" class="infinite-more-link" href="?page={{ page_obj.next_page_number }}">next</a>
+    {% endif %}
+
+  {% endif %}
+{% endblock content %}
+
+{% block scripts %}
+<script src="{% static "js/jquery.waypoints.min.js" %}"></script>
+<script src="/static/js/infinite.min.js"></script>
+<script>
+    var infinite = new Waypoint.Infinite({
+        element: $('.infinite-container')[0],
+
+        offset: 'bottom-in-view',
+
+        onBeforePageLoad: function () {
+            $('.loading').show();
+        },
+        onAfterPageLoad: function () {
+            $('.loading').hide();
+        }
+
+    });
+</script>
+{% endblock scripts %}

@@ -241,7 +241,12 @@ const projects = [
     description: "A Django-based forum webisite where people can put their different opinions",
     imgSrc: "assets/Forum.png"
   },
-  
+  {
+  title: "BrickBuster Game",
+  url: "https://github.com/ianshulx/Django-Projects-for-beginners/tree/main-616/brickbuster",
+  description: "A classic brick-breaking arcade game built with Django and JavaScript.",
+  imgSrc: "assets/brick.png"
+}
 
 ];
 

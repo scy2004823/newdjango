@@ -1,0 +1,188 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>BRICKBUSTER - the ultimate brick falling simulator</title>
+    <link rel="icon" href="{% static 'img/logo.png' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/reset.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/hamburger.css' %}">
+    {% block links %}{% endblock %}
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/home-media.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <style media="screen">
+      @font-face {
+       font-family: arcade;
+       src: url("{% static 'fonts/ARCADECLASSIC.ttf' %}");
+      }
+      @font-face {
+       font-family: pixelated;
+       src: url("{% static 'fonts/pixelFJ8pt1__.ttf' %}");
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="logo">
+        <a href="{% url 'home' %}"><h1>BRICKBUSTER</h1></a>
+        <div class="logo-line"></div>
+        <div class="made-by">made by <a target="_blank"  href="https://github.com/petosbratok">petosbratok</a></div>
+      </div>
+      <div class="menu">
+        <ul>
+          <li class="dropdown">
+            <span class="menu-link"><i class="fas fa-caret-down"></i> How to play</span>
+            <div class="dropdown-content">
+              <span <div class="dropdown-line">
+                <span>Move left:</span>
+                <!-- <i class="how-to-icon fas fa-long-arrow-alt-left"></i> -->
+                <img src="{% static 'img/arrow-right.png' %}" alt="" class="arrow-left">
+              </span>
+              <span <div class="dropdown-line">
+                <span>Move right:</span>
+                <!-- <i class="how-to-icon fas fa-long-arrow-alt-right"></i> -->
+                <img src="{% static 'img/arrow-right.png' %}" alt="">
+              </span>
+              <span <div class="dropdown-line">
+                <span>Rotate:</span>
+                <!-- <i class="how-to-icon fas fa-long-arrow-alt-up"></i> -->
+                <img src="{% static 'img/arrow-right.png' %}" alt="" class="arrow-up">
+              </span>
+              <span <div class="dropdown-line">
+                <span>Speed up:</span>
+                <!-- <i class="how-to-icon fas fa-long-arrow-alt-down"></i> -->
+                <img src="{% static 'img/arrow-right.png' %}" alt="" class="arrow-down">
+              </span>
+              <span <div class="dropdown-line">
+                <span>Pause:</span>
+                <span>Esc</span>
+              </span>
+            </div>
+          </li>
+          <li><a href="{% url 'scoreboard' %}" class="menu-link">Leaderboard</a></li>
+          <!-- <li><a target="_blank" href="https://github.com/petosbratok" class="menu-link">Other projects</a></li> -->
+        {% if user.is_authenticated %}
+          <li><a class="menu-link" href="{% url 'profile' %}">Profile</a></li>
+          <li><a class="menu-link" href="{% url 'logout' %}">Log Out</a></li>
+        {% else %}
+          <li><a class="menu-link" href="{% url 'login' %}">Log In</a></li>
+          <li><a class="menu-link" href="{% url 'register' %}">Register</a></li>
+        {% endif %}
+        </ul>
+      </div>
+      </header>
+      <nav>
+        <button style="display: block;" id="nav-button" class="hamburger hamburger--squeeze" type="button">
+          <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+          </span>
+        </button>
+        <div class="ul-container hidden">
+          <ul>
+            <div class="logo">
+              <a href="{% url 'home' %}"><h1>BRICKBUSTER</h1></a>
+              <div class="logo-line"></div>
+              <div class="made-by">made by <a target="_blank"  href="https://github.com/petosbratok">petosbratok</a></div>
+            </div>
+            <li class="dropdown">
+              <span class="menu-link"><i class="fas fa-caret-down"></i> How to play</span>
+              <div class="dropdown-content">
+                <span <div class="dropdown-line">
+                  <span>Move left:</span>
+                  <!-- <i class="how-to-icon fas fa-long-arrow-alt-left"></i> -->
+                  <img src="{% static 'img/arrow-right.png' %}" alt="" class="arrow-left">
+                </span>
+                <span <div class="dropdown-line">
+                  <span>Move right:</span>
+                  <!-- <i class="how-to-icon fas fa-long-arrow-alt-right"></i> -->
+                  <img src="{% static 'img/arrow-right.png' %}" alt="">
+                </span>
+                <span <div class="dropdown-line">
+                  <span>Rotate:</span>
+                  <!-- <i class="how-to-icon fas fa-long-arrow-alt-up"></i> -->
+                  <img src="{% static 'img/arrow-right.png' %}" alt="" class="arrow-up">
+                </span>
+                <span <div class="dropdown-line">
+                  <span>Speed up:</span>
+                  <!-- <i class="how-to-icon fas fa-long-arrow-alt-down"></i> -->
+                  <img src="{% static 'img/arrow-right.png' %}" alt="" class="arrow-down">
+                </span>
+                <span <div class="dropdown-line">
+                  <span>Pause:</span>
+                  <span>Esc</span>
+                </span>
+              </div>
+            </li>
+            <li><a href="{% url 'scoreboard' %}" class="menu-link">Leaderboard</a></li>
+            {% if user.is_authenticated %}
+              <li><a class="nav-link" href="{% url 'profile' %}">Profile</a></li>
+              <li><a class="nav-link" href="{% url 'logout' %}">Log Out</a></li>
+            {% else %}
+              <li><a class="nav-link" href="{% url 'login' %}">Log In</a></li>
+              <li><a class="nav-link" href="{% url 'register' %}">Register</a></li>
+            {% endif %}
+          </ul>
+        </div>
+      </nav>
+      <main class="content">
+        {% block content %}{% endblock %}
+      </main>
+    </div>
+  </div>
+  <footer>
+    <div class="created-by">
+      <div class="">
+        <span>Created by <a target="_blank" href="https://github.com/petosbratok">petosbratok</a></span>
+        <br>
+        <span>Full-stack on daily basis</span>
+      </div>
+      <p>Contact me: <a href="mailto:opletaevpetr@mail.ru">opletaevpetr@mail.ru</a> </p>
+    </div>
+    <div class="flexing-container">
+      <div class="technologies">
+        <p>What I use:</p>
+        <ul>
+          <li>HTML</li>
+          <li>JS</li>
+          <li>CSS</li>
+          <li>Python</li>
+          <li>Django</li>
+          <li>SQLite</li>
+        </ul>
+      </div>
+      <div class="can-do">
+        <p>What I do:</p>
+        <ul>
+          <li>Web design</li>
+          <li>Front-end development</li>
+          <li>Back-end development</li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+  </body>
+  <script></script>
+  <script src="https://kit.fontawesome.com/97be8968f0.js" crossorigin="anonymous"></script>
+  <script>
+    // activate hamburger button
+    var body = document.querySelector("body");
+    var hamburger = document.querySelector(".hamburger");
+    var ul_container = document.querySelector(".ul-container")
+      // On click
+    hamburger.addEventListener("click", function() {
+      // Toggle class "is-active"
+      console.log('done')
+      hamburger.classList.toggle("is-active");
+      body.classList.toggle("hide_scroll");
+      ul_container.classList.toggle("hidden");
+    });
+  </script>
+  {% block scripts %}
+  {% endblock %}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+</html>

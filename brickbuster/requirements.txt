@@ -1,0 +1,6 @@
+python
+Pillow
+whitenoise
+Django
+djangorestframework
+django-crispy-form
