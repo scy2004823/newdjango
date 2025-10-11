@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image Compressor</title>
+</head>
+<body>
+    <h1>Upload Image to Compress</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Compress</button>
+    </form>
+    {% if compressed_url %}
+        <h2>Compressed Image:</h2>
+        <a href="{{ compressed_url }}" download>Download Compressed Image</a>
+    {% endif %}
+</body>
+</html>
