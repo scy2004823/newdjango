@@ -1,6 +1,10 @@
 # Trae-2025.10.13 基础环境
 
-本仓库用于在 Windows + Python 虚拟环境下搭建并测试基础 Django 环境。
+本仓库用于在 Windows + Python 虚拟环境下搭建并测试基础 Django 环境，同时包含个人简历展示。
+
+## 项目内容
+- **Django 开发环境**：基础的 Python + Django 开发配置
+- **个人简历**：现代化的 HTML 简历文件 (`resume.html`)
 
 ## 准备环境
 - 激活虚拟环境：`./venv/Scripts/Activate.ps1`
@@ -30,8 +34,16 @@ python manage.py startapp main
 python manage.py runserver
 ```
 
+## 简历预览
+启动本地服务器查看简历：
+```powershell
+python -m http.server 8000
+```
+然后访问：http://localhost:8000/resume.html
+
 ## 目录说明
 - `venv/` 虚拟环境目录（已在 `.gitignore` 中忽略）
+- `resume.html` 个人简历文件
 - 后续将生成 `mysite/` 项目与 `main/` 应用目录
 
 ## 提交与推送
