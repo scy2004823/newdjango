@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人简历</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="40" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="80" r="1.5" fill="rgba(255,255,255,0.1)"/></svg>');
+        }
+
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid white;
+            margin: 0 auto 20px;
+            background: linear-gradient(45deg, #3498db, #2ecc71);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            color: white;
+            position: relative;
+            z-index: 1;
+        }
+
+        .name {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .title {
+            font-size: 1.2em;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9em;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 1.5em;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #3498db;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: #e74c3c;
+        }
+
+        .experience-item, .education-item {
+            margin-bottom: 25px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #3498db;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .experience-item:hover, .education-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+
+        .item-title {
+            font-weight: bold;
+            color: #2c3e50;
+            font-size: 1.1em;
+        }
+
+        .item-company {
+            color: #7f8c8d;
+            font-style: italic;
+        }
+
+        .item-date {
+            color: #95a5a6;
+            font-size: 0.9em;
+            white-space: nowrap;
+        }
+
+        .item-description {
+            color: #555;
+            margin-top: 10px;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .skill-category {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border-top: 4px solid #3498db;
+        }
+
+        .skill-category h4 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .skill-tag {
+            background: #3498db;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            transition: background 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            background: #2980b9;
+        }
+
+        .personal-info {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .personal-info h3 {
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .personal-info p {
+            line-height: 1.8;
+            opacity: 0.95;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                border-radius: 10px;
+            }
+
+            .header {
+                padding: 30px 20px;
+            }
+
+            .name {
+                font-size: 2em;
+            }
+
+            .contact-info {
+                gap: 15px;
+            }
+
+            .content {
+                padding: 30px 20px;
+            }
+
+            .item-header {
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .container {
+                box-shadow: none;
+                border-radius: 0;
+            }
+
+            .experience-item, .education-item {
+                break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="profile-img">👤</div>
+            <h1 class="name">张三</h1>
+            <p class="title">前端开发工程师</p>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <span>📧</span>
+                    <span>zhangsan@email.com</span>
+                </div>
+                <div class="contact-item">
+                    <span>📱</span>
+                    <span>138-0000-0000</span>
+                </div>
+                <div class="contact-item">
+                    <span>📍</span>
+                    <span>北京市朝阳区</span>
+                </div>
+                <div class="contact-item">
+                    <span>🔗</span>
+                    <span>github.com/zhangsan</span>
+                </div>
+            </div>
+        </header>
+
+        <main class="content">
+            <section class="section">
+                <div class="personal-info">
+                    <h3>个人简介</h3>
+                    <p>
+                        具有3年前端开发经验的工程师，熟练掌握React、Vue等现代前端框架，
+                        具备良好的代码规范和团队协作能力。热爱技术，持续学习新技术，
+                        注重用户体验和产品质量，能够独立完成项目开发并解决复杂技术问题。
+                    </p>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">工作经历</h2>
+                
+                <div class="experience-item">
+                    <div class="item-header">
+                        <div>
+                            <div class="item-title">前端开发工程师</div>
+                            <div class="item-company">ABC科技有限公司</div>
+                        </div>
+                        <div class="item-date">2022.03 - 至今</div>
+                    </div>
+                    <div class="item-description">
+                        <p>• 负责公司主要产品的前端开发和维护，使用React技术栈</p>
+                        <p>• 参与产品需求分析，与UI/UX设计师协作完成界面开发</p>
+                        <p>• 优化前端性能，页面加载速度提升30%</p>
+                        <p>• 建立前端代码规范和组件库，提高开发效率</p>
+                    </div>
+                </div>
+
+                <div class="experience-item">
+                    <div class="item-header">
+                        <div>
+                            <div class="item-title">初级前端开发工程师</div>
+                            <div class="item-company">XYZ互联网公司</div>
+                        </div>
+                        <div class="item-date">2021.06 - 2022.02</div>
+                    </div>
+                    <div class="item-description">
+                        <p>• 参与多个Web项目的前端开发，主要使用Vue.js</p>
+                        <p>• 负责移动端H5页面开发，确保跨平台兼容性</p>
+                        <p>• 与后端工程师协作，完成API接口对接</p>
+                        <p>• 参与代码审查，保证代码质量</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">教育背景</h2>
+                
+                <div class="education-item">
+                    <div class="item-header">
+                        <div>
+                            <div class="item-title">计算机科学与技术 - 本科</div>
+                            <div class="item-company">北京理工大学</div>
+                        </div>
+                        <div class="item-date">2017.09 - 2021.06</div>
+                    </div>
+                    <div class="item-description">
+                        <p>• 主修课程：数据结构、算法设计、软件工程、数据库原理</p>
+                        <p>• 获得校级奖学金，GPA: 3.7/4.0</p>
+                        <p>• 参与ACM程序设计竞赛，获得省级三等奖</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">技能专长</h2>
+                
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h4>前端技术</h4>
+                        <div class="skill-list">
+                            <span class="skill-tag">HTML5</span>
+                            <span class="skill-tag">CSS3</span>
+                            <span class="skill-tag">JavaScript</span>
+                            <span class="skill-tag">TypeScript</span>
+                            <span class="skill-tag">ES6+</span>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h4>框架/库</h4>
+                        <div class="skill-list">
+                            <span class="skill-tag">React</span>
+                            <span class="skill-tag">Vue.js</span>
+                            <span class="skill-tag">Redux</span>
+                            <span class="skill-tag">Vuex</span>
+                            <span class="skill-tag">Ant Design</span>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h4>工具/环境</h4>
+                        <div class="skill-list">
+                            <span class="skill-tag">Webpack</span>
+                            <span class="skill-tag">Vite</span>
+                            <span class="skill-tag">Git</span>
+                            <span class="skill-tag">npm/yarn</span>
+                            <span class="skill-tag">VSCode</span>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h4>其他技能</h4>
+                        <div class="skill-list">
+                            <span class="skill-tag">响应式设计</span>
+                            <span class="skill-tag">性能优化</span>
+                            <span class="skill-tag">跨浏览器兼容</span>
+                            <span class="skill-tag">RESTful API</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">项目经验</h2>
+                
+                <div class="experience-item">
+                    <div class="item-header">
+                        <div>
+                            <div class="item-title">企业管理系统</div>
+                            <div class="item-company">React + Ant Design</div>
+                        </div>
+                        <div class="item-date">2023.01 - 2023.06</div>
+                    </div>
+                    <div class="item-description">
+                        <p>• 开发企业内部管理系统，包含用户管理、权限控制、数据统计等功能</p>
+                        <p>• 使用React Hooks重构组件，提高代码可维护性</p>
+                        <p>• 实现动态路由和权限控制，支持多角色用户</p>
+                        <p>• 集成图表库，实现数据可视化展示</p>
+                    </div>
+                </div>
+
+                <div class="experience-item">
+                    <div class="item-header">
+                        <div>
+                            <div class="item-title">电商小程序</div>
+                            <div class="item-company">Vue.js + 微信小程序</div>
+                        </div>
+                        <div class="item-date">2022.08 - 2022.12</div>
+                    </div>
+                    <div class="item-description">
+                        <p>• 开发电商类微信小程序，包含商品展示、购物车、订单管理等功能</p>
+                        <p>• 实现商品搜索、筛选、排序等交互功能</p>
+                        <p>• 优化小程序性能，首屏加载时间减少40%</p>
+                        <p>• 对接微信支付API，完成支付流程</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
