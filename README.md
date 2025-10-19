@@ -1,32 +1,57 @@
-# newdjango
+# Trae-2025.10.13 基础环境
 
-一个使用 Django 4.x 初始化的空项目骨架，包含最基本的配置与开发服务器运行说明。
+本仓库用于在 Windows + Python 虚拟环境下搭建并测试基础 Django 环境，同时包含个人简历展示。
 
-## 环境要求
-- Python 3.9+（本项目使用虚拟环境 `.venv`）
-- pip（推荐升级到最新版本）
+## 项目内容
+- **Django 开发环境**：基础的 Python + Django 开发配置
+- **个人简历**：现代化的 HTML 简历文件 (`resume.html`)
 
-## 快速开始
-1. 创建虚拟环境（如未创建）：
-   - Windows：`py -3 -m venv .venv`
-2. 安装依赖：
-   - `./.venv/Scripts/python -m pip install Django`
-3. 启动开发服务器：
-   - `./.venv/Scripts/python manage.py runserver`
-   - 访问 `http://127.0.0.1:8000/`
+## 准备环境
+- 激活虚拟环境：`./venv/Scripts/Activate.ps1`
+- 验证 Python：`python --version`
+- 验证 pip：`python -m pip --version`
 
-## 项目结构
-- `manage.py`：项目管理入口
-- `mysite/`：项目设置与 URL 配置
-  - `settings.py`、`urls.py`、`wsgi.py`、`asgi.py`
-- `.venv/`：虚拟环境（已在 `.gitignore` 中忽略）
+## 安装 Django（若网络/SSL受限的建议）
+1. 常规方式：`python -m pip install django`
+2. 指定镜像源（示例：清华）：
+   - 临时：`python -m pip install -i https://pypi.tuna.tsinghua.edu.cn/simple django`
+   - 或在用户目录创建 `pip\pip.ini`（Windows）：
+     ```ini
+     [global]
+     index-url = https://pypi.tuna.tsinghua.edu.cn/simple
+     trusted-host = pypi.tuna.tsinghua.edu.cn
+     ```
+3. 若仍遇到 `check_hostname requires server_hostname`，可尝试：
+   - 关闭系统代理/VPN后重试
+   - 切换网络（热点/其他网络）
+   - 用 `--trusted-host pypi.org --trusted-host files.pythonhosted.org`（仅在受限网络中临时使用）
 
-## 迁移与数据库
-- 应用迁移：`./.venv/Scripts/python manage.py migrate`
-- 默认数据库：`db.sqlite3`（已在 `.gitignore` 中忽略）
+## 创建 Django 项目（安装成功后）
+```powershell
+python -m django startproject mysite
+cd mysite
+python manage.py startapp main
+python manage.py runserver
+```
 
-## 部署提示
-- 生产环境请关闭 `DEBUG`，并正确配置 `ALLOWED_HOSTS`
+## 简历预览
+启动本地服务器查看简历：
+```powershell
+python -m http.server 8000
+```
+然后访问：http://localhost:8000/resume.html
 
-## 许可证
-本项目采用 MIT License，详情见 `LICENSE`。
+## 目录说明
+- `venv/` 虚拟环境目录（已在 `.gitignore` 中忽略）
+- `resume.html` 个人简历文件
+- 后续将生成 `mysite/` 项目与 `main/` 应用目录
+
+## 提交与推送
+```powershell
+git add .
+git commit -m "chore: bootstrap repo docs and config"
+git remote add origin https://github.com/<your-username>/Trae-2025.10.13.git
+git push -u origin main
+```
+
+> 提示：首次推送可能需要 GitHub 登录或使用 PAT（`repo` 权限）。
