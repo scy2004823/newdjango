@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数学加法游戏</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .game-container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+        
+        .score {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            color: #495057;
+        }
+        
+        .question {
+            font-size: 2em;
+            margin: 30px 0;
+            color: #333;
+            font-weight: bold;
+        }
+        
+        input[type="number"] {
+            font-size: 1.5em;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            width: 150px;
+            text-align: center;
+            margin: 20px 0;
+            transition: border-color 0.3s;
+        }
+        
+        input[type="number"]:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        button {
+            font-size: 1.2em;
+            padding: 15px 30px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            margin: 10px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        .result {
+            margin-top: 20px;
+            font-size: 1.3em;
+            font-weight: bold;
+            min-height: 30px;
+        }
+        
+        .correct {
+            color: #28a745;
+        }
+        
+        .incorrect {
+            color: #dc3545;
+        }
+        
+        .stats {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-around;
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .stat-label {
+            font-size: 0.9em;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>🧮 数学加法游戏</h1>
+        
+        <div class="score">
+            当前分数: <span id="score">0</span>
+        </div>
+        
+        <div class="question" id="question">
+            点击"新题目"开始游戏
+        </div>
+        
+        <input type="number" id="answer" placeholder="输入答案" disabled>
+        
+        <div>
+            <button onclick="generateQuestion()">新题目</button>
+            <button onclick="checkAnswer()" id="submitBtn" disabled>提交答案</button>
+        </div>
+        
+        <div class="result" id="result"></div>
+        
+        <div class="stats">
+            <div class="stat-item">
+                <div class="stat-number" id="correct">0</div>
+                <div class="stat-label">正确</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="incorrect">0</div>
+                <div class="stat-label">错误</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="total">0</div>
+                <div class="stat-label">总题数</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentScore = 0;
+        let correctAnswers = 0;
+        let incorrectAnswers = 0;
+        let totalQuestions = 0;
+        let num1, num2, correctAnswer;
+
+        function generateQuestion() {
+            // 生成1-50之间的随机数
+            num1 = Math.floor(Math.random() * 50) + 1;
+            num2 = Math.floor(Math.random() * 50) + 1;
+            correctAnswer = num1 + num2;
+            
+            // 更新界面
+            document.getElementById('question').textContent = `${num1} + ${num2} = ?`;
+            document.getElementById('answer').disabled = false;
+            document.getElementById('answer').value = '';
+            document.getElementById('answer').focus();
+            document.getElementById('submitBtn').disabled = false;
+            document.getElementById('result').textContent = '';
+        }
+
+        function checkAnswer() {
+            const userAnswer = parseInt(document.getElementById('answer').value);
+            const resultElement = document.getElementById('result');
+            
+            if (isNaN(userAnswer)) {
+                resultElement.textContent = '请输入一个有效的数字！';
+                resultElement.className = 'result incorrect';
+                return;
+            }
+            
+            totalQuestions++;
+            
+            if (userAnswer === correctAnswer) {
+                currentScore++;
+                correctAnswers++;
+                resultElement.textContent = '🎉 正确！+1分';
+                resultElement.className = 'result correct';
+            } else {
+                currentScore--;
+                incorrectAnswers++;
+                resultElement.textContent = `❌ 错误！正确答案是 ${correctAnswer}，-1分`;
+                resultElement.className = 'result incorrect';
+            }
+            
+            // 更新显示
+            updateDisplay();
+            
+            // 禁用输入和提交按钮
+            document.getElementById('answer').disabled = true;
+            document.getElementById('submitBtn').disabled = true;
+        }
+
+        function updateDisplay() {
+            document.getElementById('score').textContent = currentScore;
+            document.getElementById('correct').textContent = correctAnswers;
+            document.getElementById('incorrect').textContent = incorrectAnswers;
+            document.getElementById('total').textContent = totalQuestions;
+        }
+
+        // 允许按Enter键提交答案
+        document.getElementById('answer').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter' && !document.getElementById('submitBtn').disabled) {
+                checkAnswer();
+            }
+        });
+
+        // 初始化显示
+        updateDisplay();
+    </script>
+</body>
+</html>
